@@ -1,0 +1,9 @@
+{
+  "name": "@guiar-me/sdk-flutter",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@changesets/cli": "^2.28.1"
+  }
+}
