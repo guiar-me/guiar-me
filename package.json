@@ -1,0 +1,13 @@
+{
+  "name": "@guiar-me/guiar.me",
+  "private": true,
+  "workspaces": [
+    "packages/sdks/flutter",
+    "packages/sdks/react",
+    "packages/ui/flutter",
+    "packages/ui/react"
+  ],
+  "dependencies": {
+    "@changesets/cli": "^2.29.0"
+  }
+}
