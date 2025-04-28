@@ -30,10 +30,14 @@ class SubscriptionModel extends Equatable {
   static SubscriptionModel fromMap(Json data) {
     return SubscriptionModel(
       id: data['id'],
-      plan: data['plan'],
+      plan: PlanModel.fromMap(data['plan']),
       status: data['status'],
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],
     );
+  }
+
+  static List<SubscriptionModel> fromList(List<dynamic> list) {
+    return list.map((dynamic item) => SubscriptionModel.fromMap(item)).toList();
   }
 }

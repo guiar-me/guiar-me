@@ -10,7 +10,7 @@ class UserModel extends Equatable {
   final String email;
   final String? phone;
   final String? birth;
-  final SubscriptionModel subscription;
+  final SubscriptionModel? subscription;
   final List<AddressModel> addresses;
   final String createdAt;
   final String updatedAt;
@@ -22,7 +22,7 @@ class UserModel extends Equatable {
     email,
     phone ?? '',
     birth ?? '',
-    subscription,
+    subscription ?? {},
     addresses,
     createdAt,
     updatedAt,
@@ -34,7 +34,7 @@ class UserModel extends Equatable {
     required this.email,
     this.phone,
     this.birth,
-    required this.subscription,
+    this.subscription,
     required this.addresses,
     required this.createdAt,
     required this.updatedAt,
@@ -47,10 +47,14 @@ class UserModel extends Equatable {
       email: data['email'],
       phone: data['phone'],
       birth: data['birth'],
-      subscription: data['subscription'],
-      addresses: data['addresses'],
+      subscription: data['subscription'] != null ? SubscriptionModel.fromMap(data['subscription']) : null,
+      addresses: AddressModel.fromList(data['addresses'] ?? []),
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],
     );
+  }
+
+  static List<UserModel> fromList(List<dynamic> list) {
+    return list.map((dynamic item) => UserModel.fromMap(item)).toList();
   }
 }
