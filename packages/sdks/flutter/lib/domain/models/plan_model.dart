@@ -52,4 +52,8 @@ class PlanModel extends Equatable {
       updatedAt: data['updated_at'],
     );
   }
+
+  static List<PlanModel> fromList(List<dynamic> list) {
+    return list.map((dynamic item) => PlanModel.fromMap(item)).toList();
+  }
 }

@@ -60,4 +60,8 @@ class AddressModel extends Equatable {
       updatedAt: data['updated_at'],
     );
   }
+
+  static List<AddressModel> fromList(List<dynamic> list) {
+    return list.map((dynamic item) => AddressModel.fromMap(item)).toList();
+  }
 }

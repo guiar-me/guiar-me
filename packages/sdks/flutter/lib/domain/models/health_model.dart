@@ -28,4 +28,8 @@ class HealthModel extends Equatable {
       timestamp: data['timestamp'],
     );
   }
+
+  static List<HealthModel> fromList(List<dynamic> list) {
+    return list.map((dynamic item) => HealthModel.fromMap(item)).toList();
+  }
 }
