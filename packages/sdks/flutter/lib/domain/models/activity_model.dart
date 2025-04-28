@@ -8,7 +8,7 @@ class ActivityModel extends Equatable {
   final int id;
   final String name;
   final String description;
-  final String type;
+  final String category;
   final bool isVerified;
   final bool isFavorite;
   final int? price;
@@ -26,7 +26,7 @@ class ActivityModel extends Equatable {
     id,
     name,
     description,
-    type,
+    category,
     isVerified,
     isFavorite,
     price ?? 0,
@@ -44,7 +44,7 @@ class ActivityModel extends Equatable {
     required this.id,
     required this.name,
     required this.description,
-    required this.type,
+    required this.category,
     required this.isVerified,
     required this.isFavorite,
     this.price,
@@ -63,7 +63,7 @@ class ActivityModel extends Equatable {
       id: data['id'],
       name: data['name'],
       description: data['description'],
-      type: data['type'],
+      category: data['category'],
       isVerified: data['is_verified'],
       isFavorite: data['is_favorite'],
       price: data['price'],
