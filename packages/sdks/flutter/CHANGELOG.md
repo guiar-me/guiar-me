@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.4
+
+### Patch Changes
+
+- bb5467f: Fix error on AlertContract types
+
 ## 1.0.3
 
 ### Patch Changes

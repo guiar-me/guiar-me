@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.1
+
+### Patch Changes
+
+- bb5467f: Add warning colors in AppColors
+
 ## 1.0.0
 
 ### Major Changes
