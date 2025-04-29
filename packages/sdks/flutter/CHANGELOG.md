@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.7
+
+### Patch Changes
+
+- 35d4ca0: Fix error in paginate to plans
+
 ## 1.0.6
 
 ### Patch Changes
