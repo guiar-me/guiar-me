@@ -1,9 +1,9 @@
 abstract class AlertContract {
-  Future<void> success({required String title, required String message});
+  void success({required String title, String? message, int? duration});
 
-  Future<void> error({required String title, required String message});
+  void error({required String title, String? message, int? duration});
 
-  Future<void> warning({required String title, required String message});
+  void warning({required String title, String? message, int? duration});
 
-  Future<void> info({required String title, required String message});
+  void info({required String title, String? message, int? duration});
 }

@@ -11,6 +11,7 @@ enum AppColors {
   primaryShadow,
   danger,
   success,
+  warning,
   transparent,
   tertiaryBackground,
   gradient,
@@ -52,6 +53,8 @@ extension AppColorsExtension on AppColors {
         return const Color(0xFFF9837C);
       case AppColors.success:
         return const Color(0xFF34A853);
+      case AppColors.warning:
+        return const Color(0xFFF7CB15);
       case AppColors.transparent:
         return Colors.transparent;
       case AppColors.gradient:
