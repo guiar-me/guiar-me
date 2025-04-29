@@ -39,3 +39,41 @@ jobs:
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync version to pubspec.yaml after publish - UI Flutter
+        run: |
+          VERSION=$(node -p "require('./packages/ui/flutter/package.json').version")
+          
+          CURRENT_VERSION=$(grep -oP 'version: \K[^+]+' packages/ui/flutter/pubspec.yaml || echo "0.0.0")
+
+          sed -i "s/^version: .*/version: $VERSION/" packages/ui/flutter/pubspec.yaml
+          
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global push.autoSetupRemote true
+          
+          # Check if pubspec.yaml was modified
+          if ! git diff --quiet packages/ui/flutter/pubspec.yaml; then
+            git add packages/ui/flutter/pubspec.yaml
+            git commit -m "chore: sync pubspec.yaml version after publish"
+            git push
+          fi
+
+      - name: Sync version to pubspec.yaml after publish - SDK Flutter
+        run: |
+          VERSION=$(node -p "require('./packages/sdks/flutter/package.json').version")
+          
+          CURRENT_VERSION=$(grep -oP 'version: \K[^+]+' packages/sdks/flutter/pubspec.yaml || echo "0.0.0")
+
+          sed -i "s/^version: .*/version: $VERSION/" packages/sdks/flutter/pubspec.yaml
+          
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global push.autoSetupRemote true
+          
+          # Check if pubspec.yaml was modified
+          if ! git diff --quiet packages/sdks/flutter/pubspec.yaml; then
+            git add packages/sdks/flutter/pubspec.yaml
+            git commit -m "chore: sync pubspec.yaml version after publish"
+            git push
+          fi
