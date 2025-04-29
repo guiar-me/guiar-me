@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.2
+
+### Patch Changes
+
+- 4aee876: Fix error on render navigation drawer widget
+
 ## 1.0.1
 
 ### Patch Changes
