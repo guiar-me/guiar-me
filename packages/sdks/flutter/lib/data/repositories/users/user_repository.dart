@@ -107,22 +107,21 @@ class UserRepository {
     return response.isRight ? Right<bool>(true) : Left<bool>(response.left!);
   }
 
-  FutureEither<PaginatedData<UserModel>> index({
-    int page = 1,
-  }) async {
-    Either<PaginatedData<dynamic>> response = await _httpClient.index<PaginatedData<dynamic>>(
-      url: 'users',
-      queryParams: {'page': page},
-      isPaginated: true,
-    );
+  FutureEither<PaginatedData<UserModel>> index({int page = 1}) async {
+    Either<PaginatedData<dynamic>> response = await _httpClient
+        .index<PaginatedData<dynamic>>(
+          url: 'users',
+          queryParams: {'page': page},
+          isPaginated: true,
+        );
 
     return response.isRight
         ? Right<PaginatedData<UserModel>>(
-            PaginatedData<UserModel>(
-              data: UserModel.fromList(response.right!.data),
-              meta: response.right!.meta,
-            ),
-          )
+          PaginatedData<UserModel>(
+            data: UserModel.fromList(response.right!.data),
+            meta: response.right!.meta,
+          ),
+        )
         : Left<PaginatedData<UserModel>>(response.left!);
   }
 }

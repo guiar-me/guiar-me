@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sdk_flutter/controllers/base_controller.dart';
 import 'package:sdk_flutter/controllers/contracts/alert.dart';
 import 'package:sdk_flutter/core/either/either.dart';
+import 'package:sdk_flutter/core/types/types.dart';
 import 'package:sdk_flutter/data/repositories/plans/add_plan_params.dart';
 import 'package:sdk_flutter/data/repositories/plans/edit_plan_params.dart';
 import 'package:sdk_flutter/data/repositories/plans/plan_repository.dart';
@@ -124,18 +125,18 @@ abstract class PlanControllerBase with Store, BaseController {
   }
 
   @action
-  void setPlans(List<PlanModel> plans) {
-    this.plans = plans;
+  void setPlans(List<PlanModel> data) {
+    plans.isEmpty ? plans = data : plans = [...plans, ...data];
   }
 
   @action
-  void setPlan(PlanModel plan) {
-    this.plan = plan;
+  void setPlan(PlanModel data) {
+    plan = data;
   }
 
   @action
   void setIsLoadingIndex(bool loading) {
-    isLoadingIndex = loading;
+    currentPage == 1 ? isLoadingIndex = loading : setIsLoadingNextPage(loading);
   }
 
   @action
@@ -162,7 +163,7 @@ abstract class PlanControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<List<PlanModel>> response = await planRepository.index();
+    Either<PaginatedData<PlanModel>> response = await planRepository.index();
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -171,7 +172,8 @@ abstract class PlanControllerBase with Store, BaseController {
     }
 
     if (response.isRight) {
-      setPlans(response.right!);
+      setPlans(response.right!.data);
+      setLastPage(response.right!.meta.lastPage);
 
       setIsLoadingIndex(false);
     }
@@ -237,5 +239,11 @@ abstract class PlanControllerBase with Store, BaseController {
 
       router.push('/plans');
     }
+  }
+
+  bool allowInitialIndex() {
+    bool allowInitialIndex = currentPage == 1 && plans.isEmpty;
+
+    return allowInitialIndex;
   }
 }

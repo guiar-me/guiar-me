@@ -33,7 +33,7 @@ void main() async {
       ),
     );
 
-    secureStorageMock.setToken(signInResult.right!.authorization);
+    secureStorageMock.setToken(signInResult.right!.authorization!);
   });
 
   group('ActivityRepository tests', () {

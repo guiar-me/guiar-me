@@ -11,15 +11,18 @@ class PlanRepository {
 
   PlanRepository(this._httpClient);
 
-  FutureEither<List<PlanModel>> index() async {
-    Either<PaginatedData<dynamic>> response = await _httpClient.index(
-      url: 'plans',
-      isPaginated: true,
-    );
+  FutureEither<PaginatedData<PlanModel>> index() async {
+    Either<PaginatedData<dynamic>> response = await _httpClient
+        .index<PaginatedData<dynamic>>(url: 'plans', isPaginated: true);
 
     return response.isRight
-        ? Right<List<PlanModel>>(PlanModel.fromList(response.right!.data))
-        : Left<List<PlanModel>>(response.left!);
+        ? Right<PaginatedData<PlanModel>>(
+          PaginatedData<PlanModel>(
+            data: PlanModel.fromList(response.right!.data),
+            meta: response.right!.meta,
+          ),
+        )
+        : Left<PaginatedData<PlanModel>>(response.left!);
   }
 
   FutureEither<PlanModel> get({required String id}) async {
