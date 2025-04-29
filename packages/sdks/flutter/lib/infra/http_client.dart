@@ -63,8 +63,8 @@ class HttpClient implements HttpClientContract {
   final Dio _client = Dio(
       BaseOptions(
         headers: <String, String>{
-          'Accept': 'sdk_flutterlication/json',
-          'Content-Type': 'sdk_flutterlication/json',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
           'Accept-Language': ui.PlatformDispatcher.instance.locale.languageCode,
         },
         baseUrl: Constants.apiBaseUrl,
