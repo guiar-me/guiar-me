@@ -3,14 +3,18 @@ import 'package:equatable/equatable.dart';
 import 'package:sdk_flutter/core/types/json.dart';
 
 class ImageModel extends Equatable {
-  final int? id;
-  final String? path;
-  final String? imageUrl;
+  final int id;
+  final String path;
+  final String imageUrl;
 
   @override
-  List<Object> get props => <Object>[id ?? 0, path ?? '', imageUrl ?? ''];
+  List<Object> get props => <Object>[id, path, imageUrl];
 
-  const ImageModel({this.id, this.path, this.imageUrl});
+  const ImageModel({
+    required this.id,
+    required this.path,
+    required this.imageUrl,
+  });
 
   static ImageModel fromMap(Json data) {
     return ImageModel(
