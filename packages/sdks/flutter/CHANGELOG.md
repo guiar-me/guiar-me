@@ -1,5 +1,12 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.5
+
+### Patch Changes
+
+- 553135b: Fix error on HttpClient
+- f1c8f09: Fix error on activity model and repository
+
 ## 1.0.4
 
 ### Patch Changes
