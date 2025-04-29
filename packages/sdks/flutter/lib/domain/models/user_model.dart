@@ -14,7 +14,7 @@ class UserModel extends Equatable {
   final List<AddressModel> addresses;
   final String createdAt;
   final String updatedAt;
-  final String authorization;
+  final String? authorization;
 
   @override
   List<Object> get props => <Object>[
@@ -27,7 +27,7 @@ class UserModel extends Equatable {
     addresses,
     createdAt,
     updatedAt,
-    authorization,
+    authorization ?? '',
   ];
 
   const UserModel({
@@ -40,7 +40,7 @@ class UserModel extends Equatable {
     required this.addresses,
     required this.createdAt,
     required this.updatedAt,
-    required this.authorization,
+    this.authorization,
   });
 
   static UserModel fromMap(Json data) {

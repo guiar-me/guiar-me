@@ -96,7 +96,7 @@ abstract class UserControllerBase with Store, BaseController {
 
   @action
   void setUsers(List<UserModel> data) {
-    users = data;
+    users.isEmpty ? users = data : users = [...users, ...data];
   }
 
   @action
@@ -111,7 +111,7 @@ abstract class UserControllerBase with Store, BaseController {
 
   @action
   void setIsLoadingIndex(bool loading) {
-    isLoadingIndex = loading;
+    currentPage == 1 ? isLoadingIndex = loading : setIsLoadingNextPage(loading);
   }
 
   @action
@@ -139,7 +139,7 @@ abstract class UserControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<List<UserModel>> response = await userRepository.index();
+    Either<PaginatedData<UserModel>> response = await userRepository.index();
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -148,9 +148,16 @@ abstract class UserControllerBase with Store, BaseController {
     }
 
     if (response.isRight) {
-      setUsers(response.right!);
+      setUsers(response.right!.data);
+      setLastPage(response.right!.meta.lastPage);
 
       setIsLoadingIndex(false);
     }
+  }
+
+  bool allowInitialIndex() {
+    bool allowInitialIndex = currentPage == 1 && users.isEmpty;
+
+    return allowInitialIndex;
   }
 }
