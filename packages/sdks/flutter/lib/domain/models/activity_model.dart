@@ -69,7 +69,7 @@ class ActivityModel extends Equatable {
       price: data['price'],
       pricePrefix: data['price_prefix'],
       priceSuffix: data['price_suffix'],
-      stars: data['stars'],
+      stars: data['stars'] is int ? data['stars'].toDouble() : data['stars'],
       totalReviews: data['total_reviews'],
       addresses: AddressModel.fromList(data['addresses'] ?? []),
       images: ImageModel.fromList(data['images'] ?? []),

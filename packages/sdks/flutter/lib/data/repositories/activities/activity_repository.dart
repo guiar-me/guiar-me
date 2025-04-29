@@ -20,7 +20,7 @@ class ActivityRepository {
     Either<PaginatedData<dynamic>> response = await _httpClient
         .index<PaginatedData<dynamic>>(
           url: 'activities',
-          queryParams: {'type': category, 'city': city, 'page': page},
+          queryParams: {'category': category, 'city': city, 'page': page},
           isPaginated: true,
         );
 

@@ -1,11 +1,12 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Constants {
-  static String appName = dotenv.get('APP_NAME');
+  static String get appName => dotenv.get('APP_NAME');
 
-  static String appPackageName = dotenv.get('APP_PACKAGE_NAME');
+  static String get appPackageName => dotenv.get('APP_PACKAGE_NAME');
 
-  static String apiBaseUrl = dotenv.get('API_BASE_URL');
+  static String get apiBaseUrl => dotenv.get('API_BASE_URL');
 
-  static String authorizationTokenKey = dotenv.get('AUTHORIZATION_TOKEN_KEY');
+  static String get authorizationTokenKey =>
+      dotenv.get('AUTHORIZATION_TOKEN_KEY');
 }
