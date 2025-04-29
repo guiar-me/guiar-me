@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.6
+
+### Patch Changes
+
+- f9270ab: Fix error in paginate to users
+
 ## 1.0.5
 
 ### Patch Changes
