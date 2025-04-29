@@ -48,16 +48,19 @@ class NavigationDrawerWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          ListView.builder(
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Icon(items[index].icon),
-                title: TextWidget(items[index].title),
-                onTap: () {
-                  GoRouter.of(context).push(items[index].route);
-                },
-              );
-            },
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(items[index].icon),
+                  title: TextWidget(items[index].title),
+                  onTap: () {
+                    GoRouter.of(context).push(items[index].route);
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
