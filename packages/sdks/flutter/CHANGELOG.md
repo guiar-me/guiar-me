@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.3
+
+### Patch Changes
+
+- 7293171: Error on user and legal content controllers
+
 ## 1.0.2
 
 ### Patch Changes
