@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.2
+
+### Patch Changes
+
+- acdf3d3: Fix error on ImageModel and update flutter_secure_storage version
+
 ## 1.0.1
 
 ### Patch Changes
