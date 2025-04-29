@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.1
+
+### Patch Changes
+
+- d452db2: Add SDK Flutter package exports
+
 ## 1.0.0
 
 ### Major Changes
