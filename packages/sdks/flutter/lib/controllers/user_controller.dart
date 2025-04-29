@@ -5,6 +5,7 @@ import 'package:sdk_flutter/data/repositories/users/edit_user_params.dart';
 import 'package:sdk_flutter/data/repositories/users/user_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'user_controller.g.dart';
 
@@ -35,7 +36,16 @@ abstract class UserControllerBase with Store, BaseController {
   );
 
   @observable
+  List<UserModel> users = [];
+
+  @observable
+  UserModel? user;
+
+  @observable
   bool isLoadingEdit = false;
+
+  @observable
+  bool isLoadingIndex = false;
 
   @action
   void setEditUserData({
@@ -90,8 +100,23 @@ abstract class UserControllerBase with Store, BaseController {
   }
 
   @action
+  void setUsers(List<UserModel> data) {
+    users = data;
+  }
+
+  @action
+  void setUser(UserModel data) {
+    user = data;
+  }
+
+  @action
   void setIsLoadingEdit(bool loading) {
     isLoadingEdit = loading;
+  }
+
+  @action
+  void setIsLoadingIndex(bool loading) {
+    isLoadingIndex = loading;
   }
 
   @action
@@ -112,6 +137,25 @@ abstract class UserControllerBase with Store, BaseController {
       setIsLoadingEdit(false);
 
       router.push(!isSubscription ? '/' : '/payment-review');
+    }
+  }
+
+  @action
+  Future<void> index() async {
+    setIsLoadingIndex(true);
+
+    Either<List<UserModel>> response = await userRepository.index();
+
+    if (response.isLeft) {
+      handleApiError(response.left!, alert, router);
+
+      setIsLoadingIndex(false);
+    }
+
+    if (response.isRight) {
+      setUsers(response.right!);
+
+      setIsLoadingIndex(false);
     }
   }
 }

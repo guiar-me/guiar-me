@@ -25,6 +25,38 @@ mixin _$UserController on UserControllerBase, Store {
     });
   }
 
+  late final _$usersAtom =
+      Atom(name: 'UserControllerBase.users', context: context);
+
+  @override
+  List<UserModel> get users {
+    _$usersAtom.reportRead();
+    return super.users;
+  }
+
+  @override
+  set users(List<UserModel> value) {
+    _$usersAtom.reportWrite(value, super.users, () {
+      super.users = value;
+    });
+  }
+
+  late final _$userAtom =
+      Atom(name: 'UserControllerBase.user', context: context);
+
+  @override
+  UserModel? get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(UserModel? value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   late final _$isLoadingEditAtom =
       Atom(name: 'UserControllerBase.isLoadingEdit', context: context);
 
@@ -41,12 +73,36 @@ mixin _$UserController on UserControllerBase, Store {
     });
   }
 
+  late final _$isLoadingIndexAtom =
+      Atom(name: 'UserControllerBase.isLoadingIndex', context: context);
+
+  @override
+  bool get isLoadingIndex {
+    _$isLoadingIndexAtom.reportRead();
+    return super.isLoadingIndex;
+  }
+
+  @override
+  set isLoadingIndex(bool value) {
+    _$isLoadingIndexAtom.reportWrite(value, super.isLoadingIndex, () {
+      super.isLoadingIndex = value;
+    });
+  }
+
   late final _$editAsyncAction =
       AsyncAction('UserControllerBase.edit', context: context);
 
   @override
   Future<void> edit(bool isSubscription) {
     return _$editAsyncAction.run(() => super.edit(isSubscription));
+  }
+
+  late final _$indexAsyncAction =
+      AsyncAction('UserControllerBase.index', context: context);
+
+  @override
+  Future<void> index() {
+    return _$indexAsyncAction.run(() => super.index());
   }
 
   late final _$UserControllerBaseActionController =
@@ -101,6 +157,28 @@ mixin _$UserController on UserControllerBase, Store {
   }
 
   @override
+  void setUsers(List<UserModel> data) {
+    final _$actionInfo = _$UserControllerBaseActionController.startAction(
+        name: 'UserControllerBase.setUsers');
+    try {
+      return super.setUsers(data);
+    } finally {
+      _$UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUser(UserModel data) {
+    final _$actionInfo = _$UserControllerBaseActionController.startAction(
+        name: 'UserControllerBase.setUser');
+    try {
+      return super.setUser(data);
+    } finally {
+      _$UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setIsLoadingEdit(bool loading) {
     final _$actionInfo = _$UserControllerBaseActionController.startAction(
         name: 'UserControllerBase.setIsLoadingEdit');
@@ -112,10 +190,24 @@ mixin _$UserController on UserControllerBase, Store {
   }
 
   @override
+  void setIsLoadingIndex(bool loading) {
+    final _$actionInfo = _$UserControllerBaseActionController.startAction(
+        name: 'UserControllerBase.setIsLoadingIndex');
+    try {
+      return super.setIsLoadingIndex(loading);
+    } finally {
+      _$UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 editUserData: ${editUserData},
-isLoadingEdit: ${isLoadingEdit}
+users: ${users},
+user: ${user},
+isLoadingEdit: ${isLoadingEdit},
+isLoadingIndex: ${isLoadingIndex}
     ''';
   }
 }

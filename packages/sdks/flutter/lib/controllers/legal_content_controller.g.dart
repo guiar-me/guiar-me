@@ -75,14 +75,12 @@ mixin _$LegalContentController on LegalContentControllerBase, Store {
     });
   }
 
-  late final _$getLegalContentAsyncAction = AsyncAction(
-      'LegalContentControllerBase.getLegalContent',
-      context: context);
+  late final _$getAsyncAction =
+      AsyncAction('LegalContentControllerBase.get', context: context);
 
   @override
-  Future<void> getLegalContent(BuildContext context, String type) {
-    return _$getLegalContentAsyncAction
-        .run(() => super.getLegalContent(context, type));
+  Future<void> get(String type) {
+    return _$getAsyncAction.run(() => super.get(type));
   }
 
   late final _$editAsyncAction =
@@ -97,13 +95,13 @@ mixin _$LegalContentController on LegalContentControllerBase, Store {
       ActionController(name: 'LegalContentControllerBase', context: context);
 
   @override
-  void setEditPrivacyPolicyData(
+  void setEditLegalContentData(
       {int? id, String? type, String? description, String? descriptionHtml}) {
     final _$actionInfo =
         _$LegalContentControllerBaseActionController.startAction(
-            name: 'LegalContentControllerBase.setEditPrivacyPolicyData');
+            name: 'LegalContentControllerBase.setEditLegalContentData');
     try {
-      return super.setEditPrivacyPolicyData(
+      return super.setEditLegalContentData(
           id: id,
           type: type,
           description: description,

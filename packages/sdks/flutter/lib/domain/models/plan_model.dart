@@ -8,7 +8,7 @@ class PlanModel extends Equatable {
   final String shortDescription;
   final String longDescription;
   final String frequency;
-  final int value;
+  final double value;
   final int couponLimit;
   final String createdAt;
   final String updatedAt;

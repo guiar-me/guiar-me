@@ -5,7 +5,6 @@ import 'package:sdk_flutter/core/either/either.dart';
 import 'package:sdk_flutter/data/repositories/legal_contents/edit_legal_content_params.dart';
 import 'package:sdk_flutter/data/repositories/legal_contents/legal_content_repository.dart';
 import 'package:sdk_flutter/domain/models/legal_content_model.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 part 'legal_content_controller.g.dart';
@@ -42,7 +41,7 @@ abstract class LegalContentControllerBase with Store, BaseController {
   bool isLoadingGet = false;
 
   @action
-  void setEditPrivacyPolicyData({
+  void setEditLegalContentData({
     int? id,
     String? type,
     String? description,
@@ -82,7 +81,7 @@ abstract class LegalContentControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> getLegalContent(BuildContext context, String type) async {
+  Future<void> get(String type) async {
     setIsLoadingGet(true);
 
     Either<LegalContentModel> response = await legalContentRepository.get(
