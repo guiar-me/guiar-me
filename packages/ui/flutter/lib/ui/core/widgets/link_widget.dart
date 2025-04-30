@@ -13,17 +13,17 @@ class LinkWidget extends StatelessWidget {
   final bool isDisabled;
   final AppColors color;
   final IconData? icon;
-  final String route;
+  final String? route;
   final String text;
 
   const LinkWidget({
-    required this.route,
     required this.text,
     this.fontSize = AppFontSizes.md,
     this.iconSize = AppFontSizes.lg,
     this.color = AppColors.primary,
     this.isDisabled = false,
     this.onPress,
+    this.route,
     this.icon,
     super.key,
   });
@@ -38,7 +38,7 @@ class LinkWidget extends StatelessWidget {
 
           if (onPress != null) onPress!();
 
-          GoRouter.of(context).push(route);
+          if (route != null) GoRouter.of(context).push(route!);
         },
         child: Opacity(
           opacity: isDisabled ? 0.5 : 1.0,
