@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.8
+
+### Patch Changes
+
+- a9fe977: Add category and city observables to ActivityController
+
 ## 1.0.7
 
 ### Patch Changes
