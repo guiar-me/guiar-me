@@ -7,18 +7,24 @@ class HighlightModel extends Equatable {
   final int id;
   final ActivityModel activity;
   final int order;
-  final String createdAt;
-  final String updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
 
   @override
-  List<Object> get props => <Object>[id, activity, order, createdAt, updatedAt];
+  List<Object> get props => <Object>[
+    id,
+    activity,
+    order,
+    createdAt ?? '',
+    updatedAt ?? '',
+  ];
 
   const HighlightModel({
     required this.id,
     required this.activity,
     required this.order,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
   static HighlightModel fromMap(Json data) {
