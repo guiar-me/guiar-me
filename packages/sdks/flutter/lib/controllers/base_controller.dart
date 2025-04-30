@@ -5,7 +5,7 @@ import 'package:mobx/mobx.dart';
 
 mixin BaseController {
   void handleApiError(Failure left, AlertContract alert, router) {
-    alert.error(title: left.message, message: left.message);
+    alert.error(title: left.message);
 
     if (left.runtimeType == UnauthenticatedFailure) {
       router.replace('/sign-in');
