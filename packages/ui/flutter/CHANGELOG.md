@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.5
+
+### Patch Changes
+
+- ea0ecba: Make route parameter nullable in LinkWidget
+
 ## 1.0.4
 
 ### Patch Changes
