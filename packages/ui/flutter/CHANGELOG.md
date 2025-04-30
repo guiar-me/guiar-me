@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.4
+
+### Patch Changes
+
+- c5adf67: Fix error on render ListBuilderWidget
+
 ## 1.0.3
 
 ### Patch Changes
