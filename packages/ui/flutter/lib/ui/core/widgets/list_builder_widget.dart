@@ -6,12 +6,12 @@ import 'package:ui_flutter/ui/core/widgets/empty_list_indicator_widget.dart';
 import 'package:ui_flutter/ui/core/widgets/spacing_widget.dart';
 import 'package:flutter/material.dart';
 
-class ListBuilderWidget extends StatefulWidget {
+class ListBuilderWidget<T> extends StatefulWidget {
   final bool isLoading;
   final bool isEmpty;
   final String emptyText;
-  final List<dynamic> items;
-  final Widget Function(BuildContext context, dynamic item) builder;
+  final List<T> items;
+  final Widget Function(BuildContext context, T item) builder;
   final Future<void> Function()? loadMoreData;
   final String scrollKey;
 
@@ -78,8 +78,8 @@ class _ListBuilderWidgetState extends State<ListBuilderWidget>
       controller: _scrollController,
       key: PageStorageKey(widget.scrollKey),
       itemCount: widget.items.length,
-      separatorBuilder: (context, index) => const SpacingWidget(AppSpacings.sm),
-      itemBuilder: (context, index) {
+      separatorBuilder: (BuildContext context, int index) => const SpacingWidget(AppSpacings.sm),
+      itemBuilder: (BuildContext context, int index) {
         var item = widget.items[index];
         return widget.builder(context, item);
       },
