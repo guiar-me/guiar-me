@@ -126,7 +126,7 @@ abstract class PlanControllerBase with Store, BaseController {
 
   @action
   void setPlans(List<PlanModel> data) {
-    plans.isEmpty ? plans = data : plans = [...plans, ...data];
+    currentPage == 1 ? plans = data : plans = [...plans, ...data];
   }
 
   @action

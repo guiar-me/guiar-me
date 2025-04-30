@@ -243,22 +243,22 @@ mixin _$PlanController on PlanControllerBase, Store {
   }
 
   @override
-  void setPlans(List<PlanModel> plans) {
+  void setPlans(List<PlanModel> data) {
     final _$actionInfo = _$PlanControllerBaseActionController.startAction(
         name: 'PlanControllerBase.setPlans');
     try {
-      return super.setPlans(plans);
+      return super.setPlans(data);
     } finally {
       _$PlanControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setPlan(PlanModel plan) {
+  void setPlan(PlanModel data) {
     final _$actionInfo = _$PlanControllerBaseActionController.startAction(
         name: 'PlanControllerBase.setPlan');
     try {
-      return super.setPlan(plan);
+      return super.setPlan(data);
     } finally {
       _$PlanControllerBaseActionController.endAction(_$actionInfo);
     }

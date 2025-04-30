@@ -69,6 +69,12 @@ abstract class ActivityControllerBase with Store, BaseController {
   ActivityModel? activity;
 
   @observable
+  String? category;
+
+  @observable
+  String? city;
+
+  @observable
   bool isLoadingIndex = false;
 
   @observable
@@ -191,7 +197,7 @@ abstract class ActivityControllerBase with Store, BaseController {
 
   @action
   void setActivities(List<ActivityModel> data) {
-    activities.isEmpty
+    currentPage == 1
         ? activities = data
         : activities = [...activities, ...data];
   }
@@ -204,6 +210,16 @@ abstract class ActivityControllerBase with Store, BaseController {
   @action
   void unsetActivity() {
     activity = null;
+  }
+
+  @action
+  void setCategory(String? data) {
+    category = data;
+  }
+
+  @action
+  void setCity(String? data) {
+    city = data;
   }
 
   @action
@@ -232,11 +248,11 @@ abstract class ActivityControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> index() async {
+  Future<void> index({String? category, String? city}) async {
     setIsLoadingIndex(true);
 
     Either<PaginatedData<ActivityModel>> response = await activityRepository
-        .index(page: currentPage);
+        .index(page: currentPage, category: category, city: city);
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -341,8 +357,11 @@ abstract class ActivityControllerBase with Store, BaseController {
     }
   }
 
-  bool allowInitialIndex() {
-    bool allowInitialIndex = currentPage == 1 && activities.isEmpty;
+  bool allowInitialIndex(String? category, String? city) {
+     bool allowInitialIndex =
+        (currentPage == 1 && activities.isEmpty) ||
+        category != this.category ||
+        city != this.city;
 
     return allowInitialIndex;
   }

@@ -105,6 +105,38 @@ mixin _$ActivityController on ActivityControllerBase, Store {
     });
   }
 
+  late final _$categoryAtom =
+      Atom(name: 'ActivityControllerBase.category', context: context);
+
+  @override
+  String? get category {
+    _$categoryAtom.reportRead();
+    return super.category;
+  }
+
+  @override
+  set category(String? value) {
+    _$categoryAtom.reportWrite(value, super.category, () {
+      super.category = value;
+    });
+  }
+
+  late final _$cityAtom =
+      Atom(name: 'ActivityControllerBase.city', context: context);
+
+  @override
+  String? get city {
+    _$cityAtom.reportRead();
+    return super.city;
+  }
+
+  @override
+  set city(String? value) {
+    _$cityAtom.reportWrite(value, super.city, () {
+      super.city = value;
+    });
+  }
+
   late final _$isLoadingIndexAtom =
       Atom(name: 'ActivityControllerBase.isLoadingIndex', context: context);
 
@@ -189,8 +221,9 @@ mixin _$ActivityController on ActivityControllerBase, Store {
       AsyncAction('ActivityControllerBase.index', context: context);
 
   @override
-  Future<void> index() {
-    return _$indexAsyncAction.run(() => super.index());
+  Future<void> index({String? category, String? city}) {
+    return _$indexAsyncAction
+        .run(() => super.index(category: category, city: city));
   }
 
   late final _$addAsyncAction =
@@ -372,6 +405,28 @@ mixin _$ActivityController on ActivityControllerBase, Store {
   }
 
   @override
+  void setCategory(String? data) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setCategory');
+    try {
+      return super.setCategory(data);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCity(String? data) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setCity');
+    try {
+      return super.setCity(data);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setIsLoadingIndex(bool loading) {
     final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
         name: 'ActivityControllerBase.setIsLoadingIndex');
@@ -435,6 +490,8 @@ fileName: ${fileName},
 fileBytes: ${fileBytes},
 activities: ${activities},
 activity: ${activity},
+category: ${category},
+city: ${city},
 isLoadingIndex: ${isLoadingIndex},
 isLoadingAdd: ${isLoadingAdd},
 isLoadingEdit: ${isLoadingEdit},

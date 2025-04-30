@@ -96,7 +96,7 @@ abstract class UserControllerBase with Store, BaseController {
 
   @action
   void setUsers(List<UserModel> data) {
-    users.isEmpty ? users = data : users = [...users, ...data];
+    currentPage == 1 ? users = data : users = [...users, ...data];
   }
 
   @action

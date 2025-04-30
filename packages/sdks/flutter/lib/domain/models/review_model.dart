@@ -9,7 +9,7 @@ class ReviewModel extends Equatable {
   final UserModel user;
   final ActivityModel activity;
   final String description;
-  final int stars;
+  final double stars;
   final bool isVerified;
   final String createdAt;
   final String updatedAt;
