@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.3
+
+### Patch Changes
+
+- f44e531: Update ListBuilderWidget to use generics for item type
+
 ## 1.0.2
 
 ### Patch Changes
