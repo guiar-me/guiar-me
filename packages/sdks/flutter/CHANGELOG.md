@@ -1,5 +1,12 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.10
+
+### Patch Changes
+
+- 93dd19d: Fixed duplicated error message
+- 0e63771: Fix error on get highlights
+
 ## 1.0.9
 
 ### Patch Changes
