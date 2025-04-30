@@ -6,12 +6,12 @@ import 'package:ui_flutter/ui/core/widgets/empty_list_indicator_widget.dart';
 import 'package:ui_flutter/ui/core/widgets/spacing_widget.dart';
 import 'package:flutter/material.dart';
 
-class ListBuilderWidget<T> extends StatefulWidget {
+class ListBuilderWidget<ItemType> extends StatefulWidget {
   final bool isLoading;
   final bool isEmpty;
   final String emptyText;
-  final List<T> items;
-  final Widget Function(BuildContext context, T item) builder;
+  final List<ItemType> items;
+  final Widget Function(BuildContext context, ItemType item) builder;
   final Future<void> Function()? loadMoreData;
   final String scrollKey;
 
@@ -27,10 +27,11 @@ class ListBuilderWidget<T> extends StatefulWidget {
   });
 
   @override
-  State<ListBuilderWidget> createState() => _ListBuilderWidgetState();
+  State<ListBuilderWidget> createState() => _ListBuilderWidgetState<ItemType>();
 }
 
-class _ListBuilderWidgetState extends State<ListBuilderWidget>
+class _ListBuilderWidgetState<ItemType>
+    extends State<ListBuilderWidget<ItemType>>
     with AutomaticKeepAliveClientMixin {
   final ScrollController _scrollController = ScrollController();
 
@@ -78,9 +79,11 @@ class _ListBuilderWidgetState extends State<ListBuilderWidget>
       controller: _scrollController,
       key: PageStorageKey(widget.scrollKey),
       itemCount: widget.items.length,
-      separatorBuilder: (BuildContext context, int index) => const SpacingWidget(AppSpacings.sm),
+      separatorBuilder: (BuildContext context, int index) {
+        return const SpacingWidget(AppSpacings.sm);
+      },
       itemBuilder: (BuildContext context, int index) {
-        var item = widget.items[index];
+        ItemType item = widget.items[index];
         return widget.builder(context, item);
       },
     );
