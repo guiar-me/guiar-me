@@ -9,7 +9,7 @@ class CityRepository {
 
   FutureEither<List<CityModel>> index() async {
     Either<List<dynamic>> response = await _httpClient.index<List<dynamic>>(
-      url: 'static/cities',
+      url: 'statics/cities',
     );
 
     return response.isRight

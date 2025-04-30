@@ -9,7 +9,7 @@ class CategoryRepository {
 
   FutureEither<List<CategoryModel>> index() async {
     Either<List<dynamic>> response = await _httpClient.index<List<dynamic>>(
-      url: 'static/categories',
+      url: 'statics/categories',
     );
 
     return response.isRight
