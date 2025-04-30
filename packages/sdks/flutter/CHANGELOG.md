@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.0.9
+
+### Patch Changes
+
+- 0a7e535: Fix correct URL paths in category and city repositories
+
 ## 1.0.8
 
 ### Patch Changes
