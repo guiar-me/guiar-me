@@ -1,7 +1,7 @@
 {
   "name": "@guiar-me/sdk-react",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
@@ -15,5 +15,17 @@
   "dependencies": {
     "axios": "^1.9.0",
     "dotenv": "^16.5.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guiar-me/guiar-me.git"
+  },
+  "author": "Guiar.me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guiar-me/guiar-me/issues"
+  },
+  "homepage": "https://github.com/guiar-me/guiar-me#readme",
+  "description": ""
 }
