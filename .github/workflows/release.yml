@@ -38,6 +38,7 @@ jobs:
           publish: npx changeset publish
           createGithubReleases: true
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sync version to pubspec.yaml after publish - UI Flutter
