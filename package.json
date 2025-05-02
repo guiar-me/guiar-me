@@ -5,7 +5,8 @@
     "packages/sdks/flutter",
     "packages/sdks/react",
     "packages/ui/flutter",
-    "packages/ui/react"
+    "packages/ui/react",
+    "packages/shared-actions/notify-slack"
   ],
   "dependencies": {
     "@changesets/cli": "^2.29.0"
