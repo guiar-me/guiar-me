@@ -1,0 +1,9 @@
+{
+    "name": "@guiar-me/shared-actions-notify-slack",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "@changesets/cli": "^2.29.0"
+    }
+}

@@ -1,0 +1,87 @@
+name: 'Send Slack Message'
+description: 'Send message to Slack via Incoming Webhook'
+inputs:
+  SLACK_WEBHOOK_URL:
+    description: 'URL of the Slack webhook'
+    required: true
+  COMMIT_MESSAGE:
+    description: 'Commit message'
+    required: true
+  USERNAME:
+    description: 'Username to send the message'
+    required: true
+  CHANNEL:
+    description: 'Channel to send the message'
+    required: true
+  REPO:
+    description: 'Repository name'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Check commit message
+      id: check
+      shell: bash
+      run: |
+        reg="^chore: update versions"
+
+        if [[ "${{ inputs.COMMIT_MESSAGE }}" =~ $reg ]]; then
+            echo "is_version_update=true" >> $GITHUB_OUTPUT
+        else
+            echo "is_version_update=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Notify Slack
+      if: steps.check.outputs.is_version_update == 'true'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const response = await github.rest.repos.getLatestRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+          const webhookUrl = '${{ inputs.SLACK_WEBHOOK_URL }}';
+          const tag = response.data.tag_name;
+          const body = response.data.body || '*No documented changes*';
+ 
+          body.replace('### Major Changes', '🔴 *Major Changes*')
+          body.replace('### Minor Changes', '🟢 *Minor Changes*')
+          body.replace('### Patch Changes', '🔵 *Patch Changes*')
+          
+          // Formatando a mensagem no padrão do Slack com links corretos
+          const text = {
+            "username": "${{ inputs.USERNAME }}",
+            "icon_emoji": ":rocket:",
+            "channel": "${{ inputs.CHANNEL }}",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": `:rocket: *New Release - ${tag}*`
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": `*Links*\n• <https://github.com/guiar-me/${{ inputs.REPO }}/releases/tag/${tag}|${tag}>`
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": body
+                }
+              }
+            ]
+          };
+
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(text)
+          });
