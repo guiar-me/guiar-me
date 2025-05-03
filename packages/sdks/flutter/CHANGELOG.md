@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.0
+
+### Minor Changes
+
+- 51c9ca3: Add request to sign in with Google
+
 ## 1.0.10
 
 ### Patch Changes
