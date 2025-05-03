@@ -6,9 +6,11 @@ import 'package:sdk_flutter/data/contracts/http_client_contract.dart';
 import 'package:sdk_flutter/data/contracts/secure_storage_contract.dart';
 import 'package:sdk_flutter/data/repositories/users/edit_user_params.dart';
 import 'package:sdk_flutter/data/repositories/users/fcm_token_params.dart';
+import 'package:sdk_flutter/data/repositories/users/google_callback_params.dart';
 import 'package:sdk_flutter/data/repositories/users/sign_in_params.dart';
 import 'package:sdk_flutter/data/repositories/users/sign_up_params.dart';
 import 'package:sdk_flutter/domain/models/fcm_token_model.dart';
+import 'package:sdk_flutter/domain/models/google_url_model.dart';
 import 'package:sdk_flutter/domain/models/user_model.dart';
 
 class UserRepository {
@@ -123,5 +125,28 @@ class UserRepository {
           ),
         )
         : Left<PaginatedData<UserModel>>(response.left!);
+  }
+
+  FutureEither<GoogleUrlModel> getGoogleUser() async {
+    Either<Json> response = await _httpClient.get(
+      url: 'users/sign-in/google/url',
+    );
+
+    return response.isRight
+        ? Right<GoogleUrlModel>(GoogleUrlModel.fromMap(response.right!))
+        : Left<GoogleUrlModel>(response.left!);
+  }
+
+  FutureEither<UserModel> googleCallback({
+    required GoogleCallbackParams params,
+  }) async {
+    Either<Json> response = await _httpClient.get(
+      url: 'users/sign-in/google/callback',
+      queryParams: params.toMap(),
+    );
+
+    return response.isRight
+        ? Right<UserModel>(UserModel.fromMap(response.right!))
+        : Left<UserModel>(response.left!);
   }
 }

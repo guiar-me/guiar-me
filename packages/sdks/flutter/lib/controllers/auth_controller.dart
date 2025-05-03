@@ -3,9 +3,11 @@ import 'package:sdk_flutter/controllers/base_controller.dart';
 import 'package:sdk_flutter/controllers/contracts/alert.dart';
 import 'package:sdk_flutter/core/either/either.dart';
 import 'package:sdk_flutter/data/repositories/users/fcm_token_params.dart';
+import 'package:sdk_flutter/data/repositories/users/google_callback_params.dart';
 import 'package:sdk_flutter/data/repositories/users/sign_in_params.dart';
 import 'package:sdk_flutter/data/repositories/users/sign_up_params.dart';
 import 'package:sdk_flutter/data/repositories/users/user_repository.dart';
+import 'package:sdk_flutter/domain/models/google_url_model.dart';
 import 'package:sdk_flutter/domain/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 import 'package:sdk_flutter/infra/notification_service.dart';
@@ -32,7 +34,15 @@ abstract class AuthControllerBase with Store, BaseController {
   );
 
   @observable
+  GoogleCallbackParams googleCallbackData = const GoogleCallbackParams(
+    code: '',
+  );
+
+  @observable
   UserModel? user;
+
+  @observable
+  GoogleUrlModel? googleUrl;
 
   @observable
   bool isAuth = false;
@@ -51,6 +61,12 @@ abstract class AuthControllerBase with Store, BaseController {
 
   @observable
   bool isLoadingGetAuth = false;
+
+  @observable
+  bool isLoadingGetGoogleUrl = false;
+
+  @observable
+  bool isLoadingGoogleCallback = false;
 
   @action
   void setSignInData({String? password, String? email}) {
@@ -77,8 +93,23 @@ abstract class AuthControllerBase with Store, BaseController {
   }
 
   @action
+  void setGoogleCallbackData({String? code}) {
+    googleCallbackData = googleCallbackData.copyWith(code: code);
+  }
+
+  @action
+  void unsetGoogleCallbackData() {
+    googleCallbackData = const GoogleCallbackParams(code: '');
+  }
+
+  @action
   void setUser(UserModel? data) {
     user = data;
+  }
+
+  @action
+  void setGoogleUrl(GoogleUrlModel? data) {
+    googleUrl = data;
   }
 
   @action
@@ -109,6 +140,16 @@ abstract class AuthControllerBase with Store, BaseController {
   @action
   void setIsLoadingGetAuth(bool loading) {
     isLoadingGetAuth = loading;
+  }
+
+  @action
+  void setIsLoadingGetGoogleUrl(bool loading) {
+    isLoadingGetGoogleUrl = loading;
+  }
+
+  @action
+  void setIsLoadingGoogleCallback(bool loading) {
+    isLoadingGoogleCallback = loading;
   }
 
   @action
@@ -234,6 +275,48 @@ abstract class AuthControllerBase with Store, BaseController {
 
         setIsLoadingGetAuth(false);
       }
+    }
+  }
+
+  @action
+  Future<void> getGoogleUrl() async {
+    setIsLoadingGetGoogleUrl(true);
+
+    Either<GoogleUrlModel> response = await userRepository.getGoogleUser();
+
+    if (response.isLeft) {
+      handleApiError(response.left!, alert, router);
+
+      setIsLoadingGetGoogleUrl(false);
+    }
+
+    if (response.isRight) {
+      setGoogleUrl(response.right!);
+      setIsLoadingGetGoogleUrl(false);
+    }
+  }
+
+  @action
+  Future<void> googleCallback() async {
+    setIsLoadingGoogleCallback(true);
+
+    Either<UserModel> response = await userRepository.googleCallback(
+      params: googleCallbackData,
+    );
+
+    if (response.isLeft) {
+      handleApiError(response.left!, alert, router);
+
+      setIsLoadingGoogleCallback(false);
+    }
+
+    if (response.isRight) {
+      unsetGoogleCallbackData();
+
+      setUser(response.right!);
+      setIsLoadingGoogleCallback(false);
+
+      router.replace('/');
     }
   }
 }
