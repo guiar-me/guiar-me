@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.1
+
+### Patch Changes
+
+- d0f30bb: Fix error on auth controller
+
 ## 1.1.0
 
 ### Minor Changes
