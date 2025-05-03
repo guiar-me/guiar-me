@@ -1,0 +1,25 @@
+name: Notify Release
+
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types:
+      - completed
+
+jobs:
+  notify-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Notify Slack
+        uses: guiar-me/guiar-me/packages/shared-actions/notify-slack@main
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
+          USERNAME: SDK/UI Release Bot
+          CHANNEL: "#sdk-ui-releases"
+          REPO: guiar-me
