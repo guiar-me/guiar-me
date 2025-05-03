@@ -41,6 +41,22 @@ mixin _$AuthController on AuthControllerBase, Store {
     });
   }
 
+  late final _$googleCallbackDataAtom =
+      Atom(name: 'AuthControllerBase.googleCallbackData', context: context);
+
+  @override
+  GoogleCallbackParams get googleCallbackData {
+    _$googleCallbackDataAtom.reportRead();
+    return super.googleCallbackData;
+  }
+
+  @override
+  set googleCallbackData(GoogleCallbackParams value) {
+    _$googleCallbackDataAtom.reportWrite(value, super.googleCallbackData, () {
+      super.googleCallbackData = value;
+    });
+  }
+
   late final _$userAtom =
       Atom(name: 'AuthControllerBase.user', context: context);
 
@@ -54,6 +70,22 @@ mixin _$AuthController on AuthControllerBase, Store {
   set user(UserModel? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
+    });
+  }
+
+  late final _$googleUrlAtom =
+      Atom(name: 'AuthControllerBase.googleUrl', context: context);
+
+  @override
+  GoogleUrlModel? get googleUrl {
+    _$googleUrlAtom.reportRead();
+    return super.googleUrl;
+  }
+
+  @override
+  set googleUrl(GoogleUrlModel? value) {
+    _$googleUrlAtom.reportWrite(value, super.googleUrl, () {
+      super.googleUrl = value;
     });
   }
 
@@ -153,6 +185,40 @@ mixin _$AuthController on AuthControllerBase, Store {
     });
   }
 
+  late final _$isLoadingGetGoogleUrlAtom =
+      Atom(name: 'AuthControllerBase.isLoadingGetGoogleUrl', context: context);
+
+  @override
+  bool get isLoadingGetGoogleUrl {
+    _$isLoadingGetGoogleUrlAtom.reportRead();
+    return super.isLoadingGetGoogleUrl;
+  }
+
+  @override
+  set isLoadingGetGoogleUrl(bool value) {
+    _$isLoadingGetGoogleUrlAtom.reportWrite(value, super.isLoadingGetGoogleUrl,
+        () {
+      super.isLoadingGetGoogleUrl = value;
+    });
+  }
+
+  late final _$isLoadingGoogleCallbackAtom = Atom(
+      name: 'AuthControllerBase.isLoadingGoogleCallback', context: context);
+
+  @override
+  bool get isLoadingGoogleCallback {
+    _$isLoadingGoogleCallbackAtom.reportRead();
+    return super.isLoadingGoogleCallback;
+  }
+
+  @override
+  set isLoadingGoogleCallback(bool value) {
+    _$isLoadingGoogleCallbackAtom
+        .reportWrite(value, super.isLoadingGoogleCallback, () {
+      super.isLoadingGoogleCallback = value;
+    });
+  }
+
   late final _$signInAsyncAction =
       AsyncAction('AuthControllerBase.signIn', context: context);
 
@@ -191,6 +257,22 @@ mixin _$AuthController on AuthControllerBase, Store {
   @override
   Future<void> getAuth() {
     return _$getAuthAsyncAction.run(() => super.getAuth());
+  }
+
+  late final _$getGoogleUrlAsyncAction =
+      AsyncAction('AuthControllerBase.getGoogleUrl', context: context);
+
+  @override
+  Future<void> getGoogleUrl() {
+    return _$getGoogleUrlAsyncAction.run(() => super.getGoogleUrl());
+  }
+
+  late final _$googleCallbackAsyncAction =
+      AsyncAction('AuthControllerBase.googleCallback', context: context);
+
+  @override
+  Future<void> googleCallback() {
+    return _$googleCallbackAsyncAction.run(() => super.googleCallback());
   }
 
   late final _$AuthControllerBaseActionController =
@@ -241,11 +323,44 @@ mixin _$AuthController on AuthControllerBase, Store {
   }
 
   @override
+  void setGoogleCallbackData({String? code}) {
+    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
+        name: 'AuthControllerBase.setGoogleCallbackData');
+    try {
+      return super.setGoogleCallbackData(code: code);
+    } finally {
+      _$AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void unsetGoogleCallbackData() {
+    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
+        name: 'AuthControllerBase.unsetGoogleCallbackData');
+    try {
+      return super.unsetGoogleCallbackData();
+    } finally {
+      _$AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setUser(UserModel? data) {
     final _$actionInfo = _$AuthControllerBaseActionController.startAction(
         name: 'AuthControllerBase.setUser');
     try {
       return super.setUser(data);
+    } finally {
+      _$AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setGoogleUrl(GoogleUrlModel? data) {
+    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
+        name: 'AuthControllerBase.setGoogleUrl');
+    try {
+      return super.setGoogleUrl(data);
     } finally {
       _$AuthControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -318,17 +433,43 @@ mixin _$AuthController on AuthControllerBase, Store {
   }
 
   @override
+  void setIsLoadingGetGoogleUrl(bool loading) {
+    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
+        name: 'AuthControllerBase.setIsLoadingGetGoogleUrl');
+    try {
+      return super.setIsLoadingGetGoogleUrl(loading);
+    } finally {
+      _$AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setIsLoadingGoogleCallback(bool loading) {
+    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
+        name: 'AuthControllerBase.setIsLoadingGoogleCallback');
+    try {
+      return super.setIsLoadingGoogleCallback(loading);
+    } finally {
+      _$AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 signInData: ${signInData},
 signUpData: ${signUpData},
+googleCallbackData: ${googleCallbackData},
 user: ${user},
+googleUrl: ${googleUrl},
 isAuth: ${isAuth},
 isLoadingSignIn: ${isLoadingSignIn},
 isLoadingSignUp: ${isLoadingSignUp},
 isLoadingSignOut: ${isLoadingSignOut},
 isLoadingMe: ${isLoadingMe},
-isLoadingGetAuth: ${isLoadingGetAuth}
+isLoadingGetAuth: ${isLoadingGetAuth},
+isLoadingGetGoogleUrl: ${isLoadingGetGoogleUrl},
+isLoadingGoogleCallback: ${isLoadingGoogleCallback}
     ''';
   }
 }
