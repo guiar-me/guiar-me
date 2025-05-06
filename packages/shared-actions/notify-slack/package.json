@@ -4,6 +4,6 @@
     "private": true,
     "type": "module",
     "devDependencies": {
-        "@changesets/cli": "^2.29.0"
+        "@changesets/cli": "^2.29.3"
     }
 }
