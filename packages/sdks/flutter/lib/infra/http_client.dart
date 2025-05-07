@@ -119,6 +119,14 @@ class HttpClient implements HttpClientContract {
 
   @override
   FutureEither<bool> put({required String url, required dynamic data}) async {
+    if (data is FormData) {
+      data.fields.add(const MapEntry('_method', 'PUT'));
+
+      dynamic apiResponse = await _client.post(url, data: data);
+
+      return parseResponse<bool>(apiResponse);
+    }
+
     dynamic apiResponse = await _client.put(url, data: data);
 
     return parseResponse<bool>(apiResponse);

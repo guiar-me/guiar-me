@@ -109,4 +109,61 @@ void main() async {
       }
     });
   });
+
+  group('Edit Activity tests', () {
+    test('it should edit activity', () async {
+      // Arrange
+      Either<PaginatedData<ActivityModel>> activitiesResult =
+          await activityRepository.index();
+      expect(activitiesResult.isRight, true);
+
+      ActivityModel activityToEdit = activitiesResult.right!.data.first;
+
+      // Act
+      Either<bool> result = await activityRepository.edit(
+        params: EditActivityParams(
+          id: activityToEdit.id,
+          addressId: activityToEdit.addresses.first.id,
+          name: 'Test Activity Edited',
+          description: 'Test Description Edited',
+          category: activityToEdit.category,
+          isVerified: activityToEdit.isVerified,
+          state: activityToEdit.addresses.first.state,
+          city: activityToEdit.addresses.first.city,
+          neighborhood: activityToEdit.addresses.first.neighborhood,
+          address: activityToEdit.addresses.first.address,
+          number: activityToEdit.addresses.first.number,
+          complement: activityToEdit.addresses.first.complement,
+        ),
+      );
+
+      // Assert
+      expect(result.isRight, true);
+      expect(result.right, true);
+    });
+  });
+
+  group('Post Activity tests', () {
+    test('it should post activity', () async {
+      // Act
+      Either<ActivityModel> result = await activityRepository.add(
+        params: AddActivityParams(
+          name: 'Test Activity',
+          description: 'Test Description',
+          category: 'activity',
+          isVerified: true,
+          state: 'Test State',
+          city: 'Test City',
+          neighborhood: 'Test Neighborhood',
+          address: 'Test Address',
+          number: '123',
+          complement: 'Test Complement',
+        ),
+      );
+
+      // Assert
+      expect(result.isRight, true);
+      expect(result.right!.name, 'Test Activity');
+    });
+  });
 }
