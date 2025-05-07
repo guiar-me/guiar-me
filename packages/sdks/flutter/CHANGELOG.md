@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.2
+
+### Patch Changes
+
+- cb1c41d: Fix error on put activities
+
 ## 1.1.1
 
 ### Patch Changes
