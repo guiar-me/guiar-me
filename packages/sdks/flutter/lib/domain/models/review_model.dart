@@ -43,7 +43,8 @@ class ReviewModel extends Equatable {
       user: UserModel.fromMap(data['user']),
       activity: ActivityModel.fromMap(data['activity']),
       description: data['description'],
-      stars: data['stars'],
+      // TODO: move it to a helper function/extension
+      stars: data['stars'] is int ? data['stars'].toDouble() : data['stars'],
       isVerified: data['is_verified'],
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],
