@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.3
+
+### Patch Changes
+
+- 5632c5c: Fix error on get reviews
+
 ## 1.1.2
 
 ### Patch Changes
