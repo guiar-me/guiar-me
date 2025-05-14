@@ -10,6 +10,7 @@ import 'package:sdk_flutter/data/contracts/secure_storage_contract.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class CustomInterceptor extends Interceptor {
   SecureStorageContract secureStorage;
@@ -71,7 +72,7 @@ class HttpClient implements HttpClientContract {
         validateStatus: (int? status) => true,
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
-        sendTimeout: const Duration(seconds: 60),
+        sendTimeout: kIsWeb ? null : const Duration(seconds: 60),
       ),
     )
     ..interceptors.add(
