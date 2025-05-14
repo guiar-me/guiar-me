@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.4
+
+### Patch Changes
+
+- 49b3f28: Fix error on http_client on run requests
+
 ## 1.1.3
 
 ### Patch Changes
