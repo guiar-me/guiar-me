@@ -1,5 +1,11 @@
 # @guiar-me/shared-actions-changeset-release
 
+## 1.0.3
+
+### Patch Changes
+
+- 4df543b: Add NPM_TOKEN input
+
 ## 1.0.2
 
 ### Patch Changes
