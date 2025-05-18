@@ -13,9 +13,11 @@ runs:
         node-version: '22.x'
 
     - name: Install Node.js dependencies
+      shell: bash
       run: npm install
 
     - name: Configure Git
+      shell: bash
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
