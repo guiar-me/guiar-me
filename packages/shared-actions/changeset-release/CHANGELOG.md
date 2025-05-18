@@ -1,5 +1,11 @@
 # @guiar-me/shared-actions-changeset-release
 
+## 1.0.2
+
+### Patch Changes
+
+- e8665d2: Specify shell for run steps
+
 ## 1.0.1
 
 ### Patch Changes
