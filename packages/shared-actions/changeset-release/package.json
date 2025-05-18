@@ -1,0 +1,9 @@
+{
+    "name": "@guiar-me/shared-actions-changeset-release",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "@changesets/cli": "^2.29.4"
+    }
+}
