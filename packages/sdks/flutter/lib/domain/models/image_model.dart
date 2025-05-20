@@ -8,7 +8,11 @@ class ImageModel extends Equatable {
   final String imageUrl;
 
   @override
-  List<Object> get props => <Object>[id, path, imageUrl];
+  List<Object> get props => <Object>[
+    id,
+    path,
+    imageUrl,
+  ];
 
   const ImageModel({
     required this.id,

@@ -8,7 +8,11 @@ class HealthModel extends Equatable {
   final String timestamp;
 
   @override
-  List<Object> get props => <Object>[status, version, timestamp];
+  List<Object> get props => <Object>[
+    status,
+    version,
+    timestamp,
+  ];
 
   const HealthModel({
     required this.status,

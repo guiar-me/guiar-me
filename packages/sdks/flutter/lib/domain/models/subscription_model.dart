@@ -11,7 +11,13 @@ class SubscriptionModel extends Equatable {
   final String updatedAt;
 
   @override
-  List<Object> get props => <Object>[id, plan, status, createdAt, updatedAt];
+  List<Object> get props => <Object>[
+    id,
+    plan,
+    status,
+    createdAt,
+    updatedAt,
+  ];
 
   const SubscriptionModel({
     required this.id,

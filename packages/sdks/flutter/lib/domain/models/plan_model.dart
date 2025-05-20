@@ -45,7 +45,7 @@ class PlanModel extends Equatable {
       shortDescription: data['short_description'],
       longDescription: data['long_description'],
       frequency: data['frequency'],
-      value: data['value'],
+      value: data['value'] is int ? data['value'].toDouble() : data['value'],
       couponLimit: data['coupon_limit'],
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],

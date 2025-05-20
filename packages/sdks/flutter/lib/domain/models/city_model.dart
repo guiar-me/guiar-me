@@ -8,7 +8,11 @@ class CityModel extends Equatable {
   final String imageUrl;
 
   @override
-  List<Object> get props => <Object>[name, nameHumanReadable, imageUrl];
+  List<Object> get props => <Object>[
+    name,
+    nameHumanReadable,
+    imageUrl,
+  ];
 
   const CityModel({
     required this.name,

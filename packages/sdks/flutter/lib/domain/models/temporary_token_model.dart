@@ -7,9 +7,15 @@ class TemporaryTokenModel extends Equatable {
   final String expiresAt;
 
   @override
-  List<Object> get props => <Object>[token, expiresAt];
+  List<Object> get props => <Object>[
+    token,
+    expiresAt,
+  ];
 
-  const TemporaryTokenModel({required this.token, required this.expiresAt});
+  const TemporaryTokenModel({
+    required this.token,
+    required this.expiresAt,
+  });
 
   static TemporaryTokenModel fromMap(Json data) {
     return TemporaryTokenModel(
@@ -19,8 +25,6 @@ class TemporaryTokenModel extends Equatable {
   }
 
   static List<TemporaryTokenModel> fromList(List<dynamic> list) {
-    return list
-        .map((dynamic item) => TemporaryTokenModel.fromMap(item))
-        .toList();
+    return list.map((dynamic item) => TemporaryTokenModel.fromMap(item)).toList();
   }
 }

@@ -6,7 +6,7 @@ class CouponModel extends Equatable {
   final int id;
   final String code;
   final String type;
-  final int value;
+  final double value;
   final bool isUsed;
   final int activityId;
   final int subscriptionId;
@@ -43,7 +43,7 @@ class CouponModel extends Equatable {
       id: data['id'],
       code: data['code'],
       type: data['type'],
-      value: data['value'],
+      value: data['value'] is int ? data['value'].toDouble() : data['value'],
       isUsed: data['is_used'],
       activityId: data['activity_id'],
       subscriptionId: data['subscription_id'],

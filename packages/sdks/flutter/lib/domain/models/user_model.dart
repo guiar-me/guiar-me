@@ -50,10 +50,7 @@ class UserModel extends Equatable {
       email: data['email'],
       phone: data['phone'],
       birth: data['birth'],
-      subscription:
-          data['subscription'] != null
-              ? SubscriptionModel.fromMap(data['subscription'])
-              : null,
+      subscription: data['subscription'] != null ? SubscriptionModel.fromMap(data['subscription']) : null,
       addresses: AddressModel.fromList(data['addresses'] ?? []),
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],

@@ -11,7 +11,7 @@ class ActivityModel extends Equatable {
   final String category;
   final bool isVerified;
   final bool isFavorite;
-  final int? price;
+  final double? price;
   final String? pricePrefix;
   final String? priceSuffix;
   final double stars;
@@ -29,7 +29,7 @@ class ActivityModel extends Equatable {
     category,
     isVerified,
     isFavorite,
-    price ?? 0,
+    price ?? 0.0,
     pricePrefix ?? '',
     priceSuffix ?? '',
     stars,
@@ -66,7 +66,7 @@ class ActivityModel extends Equatable {
       category: data['category'],
       isVerified: data['is_verified'],
       isFavorite: data['is_favorite'],
-      price: data['price'],
+      price: data['price'] is int ? data['price'].toDouble() : data['price'],
       pricePrefix: data['price_prefix'],
       priceSuffix: data['price_suffix'],
       stars: data['stars'] is int ? data['stars'].toDouble() : data['stars'],

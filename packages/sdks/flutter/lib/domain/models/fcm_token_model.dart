@@ -9,7 +9,12 @@ class FCMTokenModel extends Equatable {
   final String updatedAt;
 
   @override
-  List<Object> get props => <Object>[id, fcmToken, createdAt, updatedAt];
+  List<Object> get props => <Object>[
+    id,
+    fcmToken,
+    createdAt,
+    updatedAt,
+  ];
 
   const FCMTokenModel({
     required this.id,

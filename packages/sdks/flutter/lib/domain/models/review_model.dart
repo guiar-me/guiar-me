@@ -9,7 +9,7 @@ class ReviewModel extends Equatable {
   final UserModel user;
   final ActivityModel activity;
   final String description;
-  final double stars;
+  final int stars;
   final bool isVerified;
   final String createdAt;
   final String updatedAt;
@@ -43,8 +43,7 @@ class ReviewModel extends Equatable {
       user: UserModel.fromMap(data['user']),
       activity: ActivityModel.fromMap(data['activity']),
       description: data['description'],
-      // TODO: move it to a helper function/extension
-      stars: data['stars'] is int ? data['stars'].toDouble() : data['stars'],
+      stars: data['stars'],
       isVerified: data['is_verified'],
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],
