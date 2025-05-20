@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.1.5
+
+### Patch Changes
+
+- 5342a1d: Update Flutter SDK models from latest API documentation
+
 ## 1.1.4
 
 ### Patch Changes
