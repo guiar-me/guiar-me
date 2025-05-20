@@ -11,6 +11,7 @@ class ReviewModel extends Equatable {
   final String description;
   final int stars;
   final bool isVerified;
+  final bool? wasApproved;
   final String createdAt;
   final String updatedAt;
 
@@ -22,6 +23,7 @@ class ReviewModel extends Equatable {
     description,
     stars,
     isVerified,
+    wasApproved ?? false,
     createdAt,
     updatedAt,
   ];
@@ -33,6 +35,7 @@ class ReviewModel extends Equatable {
     required this.description,
     required this.stars,
     required this.isVerified,
+    this.wasApproved,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -45,6 +48,7 @@ class ReviewModel extends Equatable {
       description: data['description'],
       stars: data['stars'],
       isVerified: data['is_verified'],
+      wasApproved: data['was_approved'],
       createdAt: data['created_at'],
       updatedAt: data['updated_at'],
     );
