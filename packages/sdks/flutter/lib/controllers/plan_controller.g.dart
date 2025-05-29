@@ -13,13 +13,13 @@ mixin _$PlanController on PlanControllerBase, Store {
       Atom(name: 'PlanControllerBase.addPlanData', context: context);
 
   @override
-  AddPlanParams get addPlanData {
+  AddPlanBodyParam get addPlanData {
     _$addPlanDataAtom.reportRead();
     return super.addPlanData;
   }
 
   @override
-  set addPlanData(AddPlanParams value) {
+  set addPlanData(AddPlanBodyParam value) {
     _$addPlanDataAtom.reportWrite(value, super.addPlanData, () {
       super.addPlanData = value;
     });
@@ -29,15 +29,31 @@ mixin _$PlanController on PlanControllerBase, Store {
       Atom(name: 'PlanControllerBase.editPlanData', context: context);
 
   @override
-  EditPlanParams get editPlanData {
+  EditPlanBodyParam get editPlanData {
     _$editPlanDataAtom.reportRead();
     return super.editPlanData;
   }
 
   @override
-  set editPlanData(EditPlanParams value) {
+  set editPlanData(EditPlanBodyParam value) {
     _$editPlanDataAtom.reportWrite(value, super.editPlanData, () {
       super.editPlanData = value;
+    });
+  }
+
+  late final _$editPlanUrlAtom =
+      Atom(name: 'PlanControllerBase.editPlanUrl', context: context);
+
+  @override
+  EditPlanUrlParam get editPlanUrl {
+    _$editPlanUrlAtom.reportRead();
+    return super.editPlanUrl;
+  }
+
+  @override
+  set editPlanUrl(EditPlanUrlParam value) {
+    _$editPlanUrlAtom.reportWrite(value, super.editPlanUrl, () {
+      super.editPlanUrl = value;
     });
   }
 
@@ -149,8 +165,8 @@ mixin _$PlanController on PlanControllerBase, Store {
       AsyncAction('PlanControllerBase.get', context: context);
 
   @override
-  Future<void> get(String id) {
-    return _$getAsyncAction.run(() => super.get(id));
+  Future<void> get(int planId) {
+    return _$getAsyncAction.run(() => super.get(planId));
   }
 
   late final _$addAsyncAction =
@@ -208,8 +224,7 @@ mixin _$PlanController on PlanControllerBase, Store {
 
   @override
   void setEditPlanData(
-      {int? id,
-      String? name,
+      {String? name,
       String? shortDescription,
       String? longDescription,
       String? frequency,
@@ -219,7 +234,6 @@ mixin _$PlanController on PlanControllerBase, Store {
         name: 'PlanControllerBase.setEditPlanData');
     try {
       return super.setEditPlanData(
-          id: id,
           name: name,
           shortDescription: shortDescription,
           longDescription: longDescription,
@@ -237,6 +251,17 @@ mixin _$PlanController on PlanControllerBase, Store {
         name: 'PlanControllerBase.unsetEditPlanData');
     try {
       return super.unsetEditPlanData();
+    } finally {
+      _$PlanControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEditPlanUrl({int? planId}) {
+    final _$actionInfo = _$PlanControllerBaseActionController.startAction(
+        name: 'PlanControllerBase.setEditPlanUrl');
+    try {
+      return super.setEditPlanUrl(planId: planId);
     } finally {
       _$PlanControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -324,6 +349,7 @@ mixin _$PlanController on PlanControllerBase, Store {
     return '''
 addPlanData: ${addPlanData},
 editPlanData: ${editPlanData},
+editPlanUrl: ${editPlanUrl},
 plans: ${plans},
 plan: ${plan},
 isLoadingIndex: ${isLoadingIndex},

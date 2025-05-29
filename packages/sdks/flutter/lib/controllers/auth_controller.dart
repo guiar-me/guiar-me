@@ -1,48 +1,30 @@
 import 'package:go_router/go_router.dart';
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/data/repositories/users/fcm_token_params.dart';
-import 'package:sdk_flutter/data/repositories/users/google_callback_params.dart';
-import 'package:sdk_flutter/data/repositories/users/sign_in_params.dart';
-import 'package:sdk_flutter/data/repositories/users/sign_up_params.dart';
-import 'package:sdk_flutter/data/repositories/users/user_repository.dart';
-import 'package:sdk_flutter/domain/models/google_url_model.dart';
-import 'package:sdk_flutter/domain/models/user_model.dart';
 import 'package:mobx/mobx.dart';
-import 'package:sdk_flutter/infra/notification_service.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'auth_controller.g.dart';
 
 class AuthController = AuthControllerBase with _$AuthController;
 
 abstract class AuthControllerBase with Store, BaseController {
-  final UserRepository userRepository;
+  final UsersRepository userRepository;
   final AlertContract alert;
   final GoRouter router;
 
   AuthControllerBase(this.userRepository, this.alert, this.router);
 
   @observable
-  SignInParams signInData = const SignInParams(email: '', password: '');
+  SignInUserBodyParam signInData = const SignInUserBodyParam(email: '', password: '');
 
   @observable
-  SignUpParams signUpData = const SignUpParams(
+  SignUpUserBodyParam signUpData = const SignUpUserBodyParam(
     name: '',
     email: '',
     password: '',
   );
 
   @observable
-  GoogleCallbackParams googleCallbackData = const GoogleCallbackParams(
-    code: '',
-  );
-
-  @observable
   UserModel? user;
-
-  @observable
-  GoogleUrlModel? googleUrl;
 
   @observable
   bool isAuth = false;
@@ -62,12 +44,6 @@ abstract class AuthControllerBase with Store, BaseController {
   @observable
   bool isLoadingGetAuth = false;
 
-  @observable
-  bool isLoadingGetGoogleUrl = false;
-
-  @observable
-  bool isLoadingGoogleCallback = false;
-
   @action
   void setSignInData({String? password, String? email}) {
     signInData = signInData.copyWith(password: password, email: email);
@@ -75,7 +51,7 @@ abstract class AuthControllerBase with Store, BaseController {
 
   @action
   void unsetSignInData() {
-    signInData = const SignInParams(email: '', password: '');
+    signInData = const SignInUserBodyParam(email: '', password: '');
   }
 
   @action
@@ -89,27 +65,12 @@ abstract class AuthControllerBase with Store, BaseController {
 
   @action
   void unsetSignUpData() {
-    signUpData = const SignUpParams(name: '', email: '', password: '');
-  }
-
-  @action
-  void setGoogleCallbackData({String? code}) {
-    googleCallbackData = googleCallbackData.copyWith(code: code);
-  }
-
-  @action
-  void unsetGoogleCallbackData() {
-    googleCallbackData = const GoogleCallbackParams(code: '');
+    signUpData = const SignUpUserBodyParam(name: '', email: '', password: '');
   }
 
   @action
   void setUser(UserModel? data) {
     user = data;
-  }
-
-  @action
-  void setGoogleUrl(GoogleUrlModel? data) {
-    googleUrl = data;
   }
 
   @action
@@ -143,20 +104,10 @@ abstract class AuthControllerBase with Store, BaseController {
   }
 
   @action
-  void setIsLoadingGetGoogleUrl(bool loading) {
-    isLoadingGetGoogleUrl = loading;
-  }
-
-  @action
-  void setIsLoadingGoogleCallback(bool loading) {
-    isLoadingGoogleCallback = loading;
-  }
-
-  @action
   Future<void> signIn() async {
     setIsLoadingSignIn(true);
 
-    Either<UserModel> response = await userRepository.signIn(
+    Either<UserModel> response = await userRepository.signInUser(
       params: signInData,
     );
 
@@ -180,7 +131,7 @@ abstract class AuthControllerBase with Store, BaseController {
   Future<void> signUp() async {
     setIsLoadingSignUp(true);
 
-    Either<UserModel> response = await userRepository.signUp(
+    Either<UserModel> response = await userRepository.signUpUser(
       params: signUpData,
     );
 
@@ -202,30 +153,30 @@ abstract class AuthControllerBase with Store, BaseController {
 
   @action
   Future<void> signOut() async {
-    setIsLoadingSignOut(true);
+    // setIsLoadingSignOut(true);
 
-    Either<bool> response = await userRepository.signOut();
+    // Either<bool> response = await userRepository.signOut();
 
-    if (response.isLeft) {
-      handleApiError(response.left!, alert, router);
+    // if (response.isLeft) {
+    //   handleApiError(response.left!, alert, router);
 
-      setIsLoadingSignOut(false);
-    }
+    //   setIsLoadingSignOut(false);
+    // }
 
-    if (response.isRight) {
-      unsetSignInData();
-      unsetSignUpData();
+    // if (response.isRight) {
+    //   unsetSignInData();
+    //   unsetSignUpData();
 
-      setUser(null);
-      setIsLoadingSignOut(false);
-    }
+    //   setUser(null);
+    //   setIsLoadingSignOut(false);
+    // }
   }
 
   @action
   Future<void> me({bool isShowError = true}) async {
     setIsLoadingMe(true);
 
-    Either<UserModel> response = await userRepository.me();
+    Either<UserModel> response = await userRepository.meUser();
 
     if (response.isLeft) {
       if (isShowError) {
@@ -239,10 +190,9 @@ abstract class AuthControllerBase with Store, BaseController {
       String? fcmToken = await NotificationService.getToken();
 
       if (fcmToken != null) {
-        await userRepository.fcmToken(
-          params: FCMTokenParams(
+        await userRepository.addFcmToken(
+          params: AddFcmTokenBodyParam(
             fcmToken: fcmToken,
-            userId: response.right!.id,
           ),
         );
       }
@@ -255,68 +205,26 @@ abstract class AuthControllerBase with Store, BaseController {
 
   @action
   Future<void> getAuth() async {
-    setIsLoadingGetAuth(true);
+    // setIsLoadingGetAuth(true);
 
-    Either<bool> hasAuthTokenResponse = await userRepository.hasAuthToken();
+    // Either<bool> hasAuthTokenResponse = await userRepository.hasAuthToken();
 
-    if (hasAuthTokenResponse.isLeft) {
-      setIsAuth(false);
-      setIsLoadingGetAuth(false);
-    }
+    // if (hasAuthTokenResponse.isLeft) {
+    //   setIsAuth(false);
+    //   setIsLoadingGetAuth(false);
+    // }
 
-    if (hasAuthTokenResponse.isRight) {
-      if (!hasAuthTokenResponse.right!) {
-        setIsAuth(false);
-        setIsLoadingGetAuth(false);
-      }
+    // if (hasAuthTokenResponse.isRight) {
+    //   if (!hasAuthTokenResponse.right!) {
+    //     setIsAuth(false);
+    //     setIsLoadingGetAuth(false);
+    //   }
 
-      if (hasAuthTokenResponse.right!) {
-        await me(isShowError: false);
+    //   if (hasAuthTokenResponse.right!) {
+    //     await me(isShowError: false);
 
-        setIsLoadingGetAuth(false);
-      }
-    }
-  }
-
-  @action
-  Future<void> getGoogleUrl() async {
-    setIsLoadingGetGoogleUrl(true);
-
-    Either<GoogleUrlModel> response = await userRepository.getGoogleUser();
-
-    if (response.isLeft) {
-      handleApiError(response.left!, alert, router);
-
-      setIsLoadingGetGoogleUrl(false);
-    }
-
-    if (response.isRight) {
-      setGoogleUrl(response.right!);
-      setIsLoadingGetGoogleUrl(false);
-    }
-  }
-
-  @action
-  Future<void> googleCallback() async {
-    setIsLoadingGoogleCallback(true);
-
-    Either<UserModel> response = await userRepository.googleCallback(
-      params: googleCallbackData,
-    );
-
-    if (response.isLeft) {
-      handleApiError(response.left!, alert, router);
-
-      setIsLoadingGoogleCallback(false);
-    }
-
-    if (response.isRight) {
-      unsetGoogleCallbackData();
-
-      setUser(response.right!);
-      setIsLoadingGoogleCallback(false);
-
-      router.replace('/');
-    }
+    //     setIsLoadingGetAuth(false);
+    //   }
+    // }
   }
 }

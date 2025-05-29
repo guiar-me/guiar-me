@@ -13,15 +13,31 @@ mixin _$UserController on UserControllerBase, Store {
       Atom(name: 'UserControllerBase.editUserData', context: context);
 
   @override
-  EditUserParams get editUserData {
+  EditUserBodyParam get editUserData {
     _$editUserDataAtom.reportRead();
     return super.editUserData;
   }
 
   @override
-  set editUserData(EditUserParams value) {
+  set editUserData(EditUserBodyParam value) {
     _$editUserDataAtom.reportWrite(value, super.editUserData, () {
       super.editUserData = value;
+    });
+  }
+
+  late final _$editUserUrlParamsAtom =
+      Atom(name: 'UserControllerBase.editUserUrlParams', context: context);
+
+  @override
+  EditUserUrlParam get editUserUrlParams {
+    _$editUserUrlParamsAtom.reportRead();
+    return super.editUserUrlParams;
+  }
+
+  @override
+  set editUserUrlParams(EditUserUrlParam value) {
+    _$editUserUrlParamsAtom.reportWrite(value, super.editUserUrlParams, () {
+      super.editUserUrlParams = value;
     });
   }
 
@@ -93,8 +109,8 @@ mixin _$UserController on UserControllerBase, Store {
       AsyncAction('UserControllerBase.edit', context: context);
 
   @override
-  Future<void> edit(bool isSubscription) {
-    return _$editAsyncAction.run(() => super.edit(isSubscription));
+  Future<void> edit() {
+    return _$editAsyncAction.run(() => super.edit());
   }
 
   late final _$indexAsyncAction =
@@ -116,13 +132,13 @@ mixin _$UserController on UserControllerBase, Store {
       String? phone,
       String? birth,
       int? addressId,
-      String? zipCode,
-      String? state,
-      String? city,
-      String? neighborhood,
-      String? address,
-      String? number,
-      String? complement}) {
+      String? addressZipCode,
+      String? addressState,
+      String? addressCity,
+      String? addressNeighborhood,
+      String? addressAddress,
+      String? addressNumber,
+      String? addressComplement}) {
     final _$actionInfo = _$UserControllerBaseActionController.startAction(
         name: 'UserControllerBase.setEditUserData');
     try {
@@ -133,13 +149,13 @@ mixin _$UserController on UserControllerBase, Store {
           phone: phone,
           birth: birth,
           addressId: addressId,
-          zipCode: zipCode,
-          state: state,
-          city: city,
-          neighborhood: neighborhood,
-          address: address,
-          number: number,
-          complement: complement);
+          addressZipCode: addressZipCode,
+          addressState: addressState,
+          addressCity: addressCity,
+          addressNeighborhood: addressNeighborhood,
+          addressAddress: addressAddress,
+          addressNumber: addressNumber,
+          addressComplement: addressComplement);
     } finally {
       _$UserControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -151,6 +167,17 @@ mixin _$UserController on UserControllerBase, Store {
         name: 'UserControllerBase.unsetEditUserData');
     try {
       return super.unsetEditUserData();
+    } finally {
+      _$UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEditUserUrlParams({int? userId}) {
+    final _$actionInfo = _$UserControllerBaseActionController.startAction(
+        name: 'UserControllerBase.setEditUserUrlParams');
+    try {
+      return super.setEditUserUrlParams(userId: userId);
     } finally {
       _$UserControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -204,6 +231,7 @@ mixin _$UserController on UserControllerBase, Store {
   String toString() {
     return '''
 editUserData: ${editUserData},
+editUserUrlParams: ${editUserUrlParams},
 users: ${users},
 user: ${user},
 isLoadingEdit: ${isLoadingEdit},

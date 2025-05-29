@@ -1,6 +1,8 @@
 export 'activities/activities.dart';
 export 'categories/categories.dart';
 export 'cities/cities.dart';
+export 'coupons/coupons.dart';
+export 'credit_cards/credit_cards.dart';
 export 'favorites/favorites.dart';
 export 'highlights/highlights.dart';
 export 'legal_contents/legal_contents.dart';

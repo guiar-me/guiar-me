@@ -9,21 +9,21 @@ part of 'subscription_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SubscriptionController on SubscriptionControllerBase, Store {
-  late final _$createSubscriptionParamsAtom = Atom(
-      name: 'SubscriptionControllerBase.createSubscriptionParams',
+  late final _$addSubscriptionBodyParamAtom = Atom(
+      name: 'SubscriptionControllerBase.addSubscriptionBodyParam',
       context: context);
 
   @override
-  CreateSubscriptionParams get createSubscriptionParams {
-    _$createSubscriptionParamsAtom.reportRead();
-    return super.createSubscriptionParams;
+  AddSubscriptionBodyParam get addSubscriptionBodyParam {
+    _$addSubscriptionBodyParamAtom.reportRead();
+    return super.addSubscriptionBodyParam;
   }
 
   @override
-  set createSubscriptionParams(CreateSubscriptionParams value) {
-    _$createSubscriptionParamsAtom
-        .reportWrite(value, super.createSubscriptionParams, () {
-      super.createSubscriptionParams = value;
+  set addSubscriptionBodyParam(AddSubscriptionBodyParam value) {
+    _$addSubscriptionBodyParamAtom
+        .reportWrite(value, super.addSubscriptionBodyParam, () {
+      super.addSubscriptionBodyParam = value;
     });
   }
 
@@ -79,7 +79,7 @@ mixin _$SubscriptionController on SubscriptionControllerBase, Store {
       AsyncAction('SubscriptionControllerBase.get', context: context);
 
   @override
-  Future<void> get(String id) {
+  Future<void> get(int id) {
     return _$getAsyncAction.run(() => super.get(id));
   }
 
@@ -155,7 +155,7 @@ mixin _$SubscriptionController on SubscriptionControllerBase, Store {
   @override
   String toString() {
     return '''
-createSubscriptionParams: ${createSubscriptionParams},
+addSubscriptionBodyParam: ${addSubscriptionBodyParam},
 subscription: ${subscription},
 isLoadingGet: ${isLoadingGet},
 isLoadingCreate: ${isLoadingCreate}

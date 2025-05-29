@@ -3,6 +3,7 @@ export 'address_model.dart';
 export 'category_model.dart';
 export 'city_model.dart';
 export 'coupon_model.dart';
+export 'credit_card_model.dart';
 export 'favorite_model.dart';
 export 'fcm_token_model.dart';
 export 'google_url_model.dart';

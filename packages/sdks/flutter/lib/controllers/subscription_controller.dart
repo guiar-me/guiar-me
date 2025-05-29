@@ -1,11 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/data/repositories/subscriptions/add_subscription_params.dart';
-import 'package:sdk_flutter/data/repositories/subscriptions/subscription_repository.dart';
-import 'package:sdk_flutter/domain/models/subscription_model.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'subscription_controller.g.dart';
 
@@ -13,19 +8,19 @@ class SubscriptionController = SubscriptionControllerBase
     with _$SubscriptionController;
 
 abstract class SubscriptionControllerBase with Store, BaseController {
-  final SubscriptionRepository subscriptionRepository;
+  final SubscriptionsRepository subscriptionsRepository;
   final AlertContract alert;
   final GoRouter router;
 
   SubscriptionControllerBase(
-    this.subscriptionRepository,
+    this.subscriptionsRepository,
     this.alert,
     this.router,
   );
 
   @observable
-  CreateSubscriptionParams createSubscriptionParams =
-      const CreateSubscriptionParams(planId: 0, creditCardId: 0);
+  AddSubscriptionBodyParam addSubscriptionBodyParam =
+      const AddSubscriptionBodyParam(planId: 0, creditCardId: 0);
 
   @observable
   SubscriptionModel? subscription;
@@ -38,7 +33,7 @@ abstract class SubscriptionControllerBase with Store, BaseController {
 
   @action
   void setCreateSubscriptionParams({int? planId, int? creditCardId}) {
-    createSubscriptionParams = createSubscriptionParams.copyWith(
+    addSubscriptionBodyParam = addSubscriptionBodyParam.copyWith(
       planId: planId,
       creditCardId: creditCardId,
     );
@@ -46,7 +41,7 @@ abstract class SubscriptionControllerBase with Store, BaseController {
 
   @action
   void unsetCreateSubscriptionParams() {
-    createSubscriptionParams = createSubscriptionParams.copyWith(
+    addSubscriptionBodyParam = addSubscriptionBodyParam.copyWith(
       planId: 0,
       creditCardId: 0,
     );
@@ -68,11 +63,11 @@ abstract class SubscriptionControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> get(String id) async {
+  Future<void> get(int id) async {
     setIsLoadingGet(true);
 
-    Either<SubscriptionModel> response = await subscriptionRepository.get(
-      id: id,
+    Either<SubscriptionModel> response = await subscriptionsRepository.findSubscription(
+      urlParams: FindSubscriptionUrlParam(subscriptionId: id),
     );
 
     if (response.isLeft) {
@@ -92,8 +87,8 @@ abstract class SubscriptionControllerBase with Store, BaseController {
   Future<void> create() async {
     setIsLoadingCreate(true);
 
-    Either<SubscriptionModel> response = await subscriptionRepository.create(
-      params: createSubscriptionParams,
+    Either<SubscriptionModel> response = await subscriptionsRepository.addSubscription(
+      params: addSubscriptionBodyParam,
     );
 
     if (response.isLeft) {

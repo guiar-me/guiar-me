@@ -13,13 +13,13 @@ mixin _$ActivityController on ActivityControllerBase, Store {
       Atom(name: 'ActivityControllerBase.addActivityData', context: context);
 
   @override
-  AddActivityParams get addActivityData {
+  AddActivityBodyParam get addActivityData {
     _$addActivityDataAtom.reportRead();
     return super.addActivityData;
   }
 
   @override
-  set addActivityData(AddActivityParams value) {
+  set addActivityData(AddActivityBodyParam value) {
     _$addActivityDataAtom.reportWrite(value, super.addActivityData, () {
       super.addActivityData = value;
     });
@@ -29,47 +29,116 @@ mixin _$ActivityController on ActivityControllerBase, Store {
       Atom(name: 'ActivityControllerBase.editActivityData', context: context);
 
   @override
-  EditActivityParams get editActivityData {
+  EditActivityBodyParam get editActivityData {
     _$editActivityDataAtom.reportRead();
     return super.editActivityData;
   }
 
   @override
-  set editActivityData(EditActivityParams value) {
+  set editActivityData(EditActivityBodyParam value) {
     _$editActivityDataAtom.reportWrite(value, super.editActivityData, () {
       super.editActivityData = value;
     });
   }
 
-  late final _$fileNameAtom =
-      Atom(name: 'ActivityControllerBase.fileName', context: context);
+  late final _$editActivityUrlParamsAtom = Atom(
+      name: 'ActivityControllerBase.editActivityUrlParams', context: context);
 
   @override
-  String? get fileName {
-    _$fileNameAtom.reportRead();
-    return super.fileName;
+  EditActivityUrlParam get editActivityUrlParams {
+    _$editActivityUrlParamsAtom.reportRead();
+    return super.editActivityUrlParams;
   }
 
   @override
-  set fileName(String? value) {
-    _$fileNameAtom.reportWrite(value, super.fileName, () {
-      super.fileName = value;
+  set editActivityUrlParams(EditActivityUrlParam value) {
+    _$editActivityUrlParamsAtom.reportWrite(value, super.editActivityUrlParams,
+        () {
+      super.editActivityUrlParams = value;
     });
   }
 
-  late final _$fileBytesAtom =
-      Atom(name: 'ActivityControllerBase.fileBytes', context: context);
+  late final _$findActivityUrlParamsAtom = Atom(
+      name: 'ActivityControllerBase.findActivityUrlParams', context: context);
 
   @override
-  Uint8List? get fileBytes {
-    _$fileBytesAtom.reportRead();
-    return super.fileBytes;
+  FindActivityUrlParam get findActivityUrlParams {
+    _$findActivityUrlParamsAtom.reportRead();
+    return super.findActivityUrlParams;
   }
 
   @override
-  set fileBytes(Uint8List? value) {
-    _$fileBytesAtom.reportWrite(value, super.fileBytes, () {
-      super.fileBytes = value;
+  set findActivityUrlParams(FindActivityUrlParam value) {
+    _$findActivityUrlParamsAtom.reportWrite(value, super.findActivityUrlParams,
+        () {
+      super.findActivityUrlParams = value;
+    });
+  }
+
+  late final _$removeActivityUrlParamsAtom = Atom(
+      name: 'ActivityControllerBase.removeActivityUrlParams', context: context);
+
+  @override
+  RemoveActivityUrlParam get removeActivityUrlParams {
+    _$removeActivityUrlParamsAtom.reportRead();
+    return super.removeActivityUrlParams;
+  }
+
+  @override
+  set removeActivityUrlParams(RemoveActivityUrlParam value) {
+    _$removeActivityUrlParamsAtom
+        .reportWrite(value, super.removeActivityUrlParams, () {
+      super.removeActivityUrlParams = value;
+    });
+  }
+
+  late final _$listActivitiesQueryParamsAtom = Atom(
+      name: 'ActivityControllerBase.listActivitiesQueryParams',
+      context: context);
+
+  @override
+  ListActivitiesQueryParam get listActivitiesQueryParams {
+    _$listActivitiesQueryParamsAtom.reportRead();
+    return super.listActivitiesQueryParams;
+  }
+
+  @override
+  set listActivitiesQueryParams(ListActivitiesQueryParam value) {
+    _$listActivitiesQueryParamsAtom
+        .reportWrite(value, super.listActivitiesQueryParams, () {
+      super.listActivitiesQueryParams = value;
+    });
+  }
+
+  late final _$imageNameAtom =
+      Atom(name: 'ActivityControllerBase.imageName', context: context);
+
+  @override
+  String? get imageName {
+    _$imageNameAtom.reportRead();
+    return super.imageName;
+  }
+
+  @override
+  set imageName(String? value) {
+    _$imageNameAtom.reportWrite(value, super.imageName, () {
+      super.imageName = value;
+    });
+  }
+
+  late final _$imageBytesAtom =
+      Atom(name: 'ActivityControllerBase.imageBytes', context: context);
+
+  @override
+  Uint8List? get imageBytes {
+    _$imageBytesAtom.reportRead();
+    return super.imageBytes;
+  }
+
+  @override
+  set imageBytes(Uint8List? value) {
+    _$imageBytesAtom.reportWrite(value, super.imageBytes, () {
+      super.imageBytes = value;
     });
   }
 
@@ -246,16 +315,16 @@ mixin _$ActivityController on ActivityControllerBase, Store {
       AsyncAction('ActivityControllerBase.get', context: context);
 
   @override
-  Future<void> get(String id) {
-    return _$getAsyncAction.run(() => super.get(id));
+  Future<void> get() {
+    return _$getAsyncAction.run(() => super.get());
   }
 
   late final _$deleteAsyncAction =
       AsyncAction('ActivityControllerBase.delete', context: context);
 
   @override
-  Future<void> delete(String id) {
-    return _$deleteAsyncAction.run(() => super.delete(id));
+  Future<void> delete() {
+    return _$deleteAsyncAction.run(() => super.delete());
   }
 
   late final _$ActivityControllerBaseActionController =
@@ -311,12 +380,12 @@ mixin _$ActivityController on ActivityControllerBase, Store {
       String? category,
       bool? isVerified,
       int? addressId,
-      String? state,
-      String? city,
-      String? neighborhood,
-      String? address,
-      String? number,
-      String? complement}) {
+      String? addressState,
+      String? addressCity,
+      String? addressNeighborhood,
+      String? addressAddress,
+      String? addressNumber,
+      String? addressComplement}) {
     final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
         name: 'ActivityControllerBase.setEditActivityData');
     try {
@@ -327,12 +396,12 @@ mixin _$ActivityController on ActivityControllerBase, Store {
           category: category,
           isVerified: isVerified,
           addressId: addressId,
-          state: state,
-          city: city,
-          neighborhood: neighborhood,
-          address: address,
-          number: number,
-          complement: complement);
+          addressState: addressState,
+          addressCity: addressCity,
+          addressNeighborhood: addressNeighborhood,
+          addressAddress: addressAddress,
+          addressNumber: addressNumber,
+          addressComplement: addressComplement);
     } finally {
       _$ActivityControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -350,22 +419,112 @@ mixin _$ActivityController on ActivityControllerBase, Store {
   }
 
   @override
-  void setFileName(String data) {
+  void setEditActivityUrlParams({int? activityId}) {
     final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
-        name: 'ActivityControllerBase.setFileName');
+        name: 'ActivityControllerBase.setEditActivityUrlParams');
     try {
-      return super.setFileName(data);
+      return super.setEditActivityUrlParams(activityId: activityId);
     } finally {
       _$ActivityControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setFileBytes(Uint8List data) {
+  void unsetEditActivityUrlParams() {
     final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
-        name: 'ActivityControllerBase.setFileBytes');
+        name: 'ActivityControllerBase.unsetEditActivityUrlParams');
     try {
-      return super.setFileBytes(data);
+      return super.unsetEditActivityUrlParams();
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFindActivityUrlParams({int? activityId}) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setFindActivityUrlParams');
+    try {
+      return super.setFindActivityUrlParams(activityId: activityId);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void unsetFindActivityUrlParams() {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.unsetFindActivityUrlParams');
+    try {
+      return super.unsetFindActivityUrlParams();
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setRemoveActivityUrlParams({int? activityId}) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setRemoveActivityUrlParams');
+    try {
+      return super.setRemoveActivityUrlParams(activityId: activityId);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void unsetRemoveActivityUrlParams() {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.unsetRemoveActivityUrlParams');
+    try {
+      return super.unsetRemoveActivityUrlParams();
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setListActivitiesQueryParams(
+      {int? page, String? category, String? city}) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setListActivitiesQueryParams');
+    try {
+      return super.setListActivitiesQueryParams(
+          page: page, category: category, city: city);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void unsetListActivitiesQueryParams() {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.unsetListActivitiesQueryParams');
+    try {
+      return super.unsetListActivitiesQueryParams();
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setImageName(String data) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setImageName');
+    try {
+      return super.setImageName(data);
+    } finally {
+      _$ActivityControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setImageBytes(Uint8List data) {
+    final _$actionInfo = _$ActivityControllerBaseActionController.startAction(
+        name: 'ActivityControllerBase.setImageBytes');
+    try {
+      return super.setImageBytes(data);
     } finally {
       _$ActivityControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -486,8 +645,12 @@ mixin _$ActivityController on ActivityControllerBase, Store {
     return '''
 addActivityData: ${addActivityData},
 editActivityData: ${editActivityData},
-fileName: ${fileName},
-fileBytes: ${fileBytes},
+editActivityUrlParams: ${editActivityUrlParams},
+findActivityUrlParams: ${findActivityUrlParams},
+removeActivityUrlParams: ${removeActivityUrlParams},
+listActivitiesQueryParams: ${listActivitiesQueryParams},
+imageName: ${imageName},
+imageBytes: ${imageBytes},
 activities: ${activities},
 activity: ${activity},
 category: ${category},
