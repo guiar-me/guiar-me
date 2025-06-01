@@ -11,11 +11,11 @@ part 'category_controller.g.dart';
 class CategoryController = CategoryControllerBase with _$CategoryController;
 
 abstract class CategoryControllerBase with Store, BaseController {
-  final CategoryRepository categoryRepository;
+  final CategoriesRepository categoriesRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  CategoryControllerBase(this.categoryRepository, this.alert, this.router);
+  CategoryControllerBase(this.categoriesRepository, this.alert, this.router);
 
   @observable
   List<CategoryModel> categories = [];
@@ -38,7 +38,7 @@ abstract class CategoryControllerBase with Store, BaseController {
     setIsLoadingIndex(true);
 
     Either<List<CategoryModel>> categoriesResponse =
-        await categoryRepository.index();
+        await categoriesRepository.get();
 
     if (categoriesResponse.isLeft) {
       handleApiError(categoriesResponse.left!, alert, router);

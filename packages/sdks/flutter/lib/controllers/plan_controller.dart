@@ -1,27 +1,20 @@
 import 'package:go_router/go_router.dart';
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/core/types/types.dart';
-import 'package:sdk_flutter/data/repositories/plans/add_plan_params.dart';
-import 'package:sdk_flutter/data/repositories/plans/edit_plan_params.dart';
-import 'package:sdk_flutter/data/repositories/plans/plan_repository.dart';
-import 'package:sdk_flutter/domain/models/plan_model.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'plan_controller.g.dart';
 
 class PlanController = PlanControllerBase with _$PlanController;
 
 abstract class PlanControllerBase with Store, BaseController {
-  final PlanRepository planRepository;
+  final PlansRepository plansRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  PlanControllerBase(this.planRepository, this.alert, this.router);
+  PlanControllerBase(this.plansRepository, this.alert, this.router);
 
   @observable
-  AddPlanParams addPlanData = const AddPlanParams(
+  AddPlanBodyParam addPlanData = const AddPlanBodyParam(
     name: '',
     shortDescription: '',
     longDescription: '',
@@ -31,14 +24,18 @@ abstract class PlanControllerBase with Store, BaseController {
   );
 
   @observable
-  EditPlanParams editPlanData = const EditPlanParams(
-    id: 0,
+  EditPlanBodyParam editPlanData = const EditPlanBodyParam(
     name: '',
     shortDescription: '',
     longDescription: '',
     frequency: '',
     value: 0,
     couponLimit: 0,
+  );
+
+  @observable
+  EditPlanUrlParam editPlanUrl = const EditPlanUrlParam(
+    planId: 0,
   );
 
   @observable
@@ -80,7 +77,7 @@ abstract class PlanControllerBase with Store, BaseController {
 
   @action
   void unsetAddPlanData() {
-    addPlanData = const AddPlanParams(
+    addPlanData = const AddPlanBodyParam(
       name: '',
       shortDescription: '',
       longDescription: '',
@@ -92,7 +89,6 @@ abstract class PlanControllerBase with Store, BaseController {
 
   @action
   void setEditPlanData({
-    int? id,
     String? name,
     String? shortDescription,
     String? longDescription,
@@ -101,7 +97,6 @@ abstract class PlanControllerBase with Store, BaseController {
     int? couponLimit,
   }) {
     editPlanData = editPlanData.copyWith(
-      id: id,
       name: name,
       shortDescription: shortDescription,
       longDescription: longDescription,
@@ -113,14 +108,22 @@ abstract class PlanControllerBase with Store, BaseController {
 
   @action
   void unsetEditPlanData() {
-    editPlanData = const EditPlanParams(
-      id: 0,
+    editPlanData = const EditPlanBodyParam(
       name: '',
       shortDescription: '',
       longDescription: '',
       frequency: '',
       value: 0,
       couponLimit: 0,
+    );
+  }
+
+  @action
+  void setEditPlanUrl({
+    int? planId,
+  }) {
+    editPlanUrl = editPlanUrl.copyWith(
+      planId: planId,
     );
   }
 
@@ -163,7 +166,7 @@ abstract class PlanControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<PaginatedData<PlanModel>> response = await planRepository.index();
+    Either<PaginatedData<PlanModel>> response = await plansRepository.listPlans();
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -180,10 +183,12 @@ abstract class PlanControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> get(String id) async {
+  Future<void> get(int planId) async {
     setIsLoadingGet(true);
 
-    Either<PlanModel> response = await planRepository.get(id: id);
+    Either<PlanModel> response = await plansRepository.findPlan(
+      urlParams: FindPlanUrlParam(planId: planId),
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -202,7 +207,9 @@ abstract class PlanControllerBase with Store, BaseController {
   Future<void> add() async {
     setIsLoadingAdd(true);
 
-    Either<PlanModel> response = await planRepository.add(params: addPlanData);
+    Either<PlanModel> response = await plansRepository.addPlan(
+      params: addPlanData,
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -223,7 +230,10 @@ abstract class PlanControllerBase with Store, BaseController {
   Future<void> edit() async {
     setIsLoadingEdit(true);
 
-    Either<bool> response = await planRepository.edit(params: editPlanData);
+    Either<bool> response = await plansRepository.editPlan(
+      urlParams: editPlanUrl,
+      params: editPlanData,
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);

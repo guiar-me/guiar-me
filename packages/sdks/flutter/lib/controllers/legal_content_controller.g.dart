@@ -14,16 +14,32 @@ mixin _$LegalContentController on LegalContentControllerBase, Store {
       context: context);
 
   @override
-  EditLegalContentParams get editLegalContentData {
+  EditLegalContentBodyParam get editLegalContentData {
     _$editLegalContentDataAtom.reportRead();
     return super.editLegalContentData;
   }
 
   @override
-  set editLegalContentData(EditLegalContentParams value) {
+  set editLegalContentData(EditLegalContentBodyParam value) {
     _$editLegalContentDataAtom.reportWrite(value, super.editLegalContentData,
         () {
       super.editLegalContentData = value;
+    });
+  }
+
+  late final _$editLegalContentUrlAtom = Atom(
+      name: 'LegalContentControllerBase.editLegalContentUrl', context: context);
+
+  @override
+  EditLegalContentUrlParam get editLegalContentUrl {
+    _$editLegalContentUrlAtom.reportRead();
+    return super.editLegalContentUrl;
+  }
+
+  @override
+  set editLegalContentUrl(EditLegalContentUrlParam value) {
+    _$editLegalContentUrlAtom.reportWrite(value, super.editLegalContentUrl, () {
+      super.editLegalContentUrl = value;
     });
   }
 
@@ -95,17 +111,13 @@ mixin _$LegalContentController on LegalContentControllerBase, Store {
       ActionController(name: 'LegalContentControllerBase', context: context);
 
   @override
-  void setEditLegalContentData(
-      {int? id, String? type, String? description, String? descriptionHtml}) {
+  void setEditLegalContentData({String? description, String? descriptionHtml}) {
     final _$actionInfo =
         _$LegalContentControllerBaseActionController.startAction(
             name: 'LegalContentControllerBase.setEditLegalContentData');
     try {
       return super.setEditLegalContentData(
-          id: id,
-          type: type,
-          description: description,
-          descriptionHtml: descriptionHtml);
+          description: description, descriptionHtml: descriptionHtml);
     } finally {
       _$LegalContentControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -160,6 +172,7 @@ mixin _$LegalContentController on LegalContentControllerBase, Store {
   String toString() {
     return '''
 editLegalContentData: ${editLegalContentData},
+editLegalContentUrl: ${editLegalContentUrl},
 legalContent: ${legalContent},
 isLoadingEdit: ${isLoadingEdit},
 isLoadingGet: ${isLoadingGet}

@@ -1,2 +1,9 @@
-export 'add_review_params.dart';
-export 'review_repository.dart';
+export 'add_review_body_param.dart';
+export 'edit_review_body_param.dart';
+export 'edit_review_url_param.dart';
+export 'find_review_url_param.dart';
+export 'list_reviews_query_param.dart';
+export 'remove_review_url_param.dart';
+export 'reviews_repository.dart';
+export 'update_review_body_param.dart';
+export 'update_review_url_param.dart';

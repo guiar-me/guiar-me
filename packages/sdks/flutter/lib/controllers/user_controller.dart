@@ -7,27 +7,31 @@ part 'user_controller.g.dart';
 class UserController = UserControllerBase with _$UserController;
 
 abstract class UserControllerBase with Store, BaseController {
-  final UserRepository userRepository;
+  final UsersRepository userRepository;
   final AlertContract alert;
   final GoRouter router;
 
   UserControllerBase(this.userRepository, this.alert, this.router);
 
   @observable
-  EditUserParams editUserData = const EditUserParams(
-    id: 0,
+  EditUserBodyParam editUserData = const EditUserBodyParam(
     name: '',
     email: '',
     phone: '',
     birth: '',
     addressId: null,
-    zipCode: '',
-    state: '',
-    city: '',
-    neighborhood: '',
-    address: '',
-    number: null,
-    complement: null,
+    addressZipCode: '',
+    addressState: '',
+    addressCity: '',
+    addressNeighborhood: '',
+    addressAddress: '',
+    addressNumber: null,
+    addressComplement: null,
+  );
+
+  @observable
+  EditUserUrlParam editUserUrlParams = const EditUserUrlParam(
+    userId: 0,
   );
 
   @observable
@@ -50,47 +54,54 @@ abstract class UserControllerBase with Store, BaseController {
     String? phone,
     String? birth,
     int? addressId,
-    String? zipCode,
-    String? state,
-    String? city,
-    String? neighborhood,
-    String? address,
-    String? number,
-    String? complement,
+    String? addressZipCode,
+    String? addressState,
+    String? addressCity,
+    String? addressNeighborhood,
+    String? addressAddress,
+    String? addressNumber,
+    String? addressComplement,
   }) {
     editUserData = editUserData.copyWith(
-      id: id,
       name: name,
       email: email,
       phone: phone,
       birth: birth,
       addressId: addressId,
-      zipCode: zipCode,
-      state: state,
-      city: city,
-      neighborhood: neighborhood,
-      address: address,
-      number: number,
-      complement: complement,
+      addressZipCode: addressZipCode,
+      addressState: addressState,
+      addressCity: addressCity,
+      addressNeighborhood: addressNeighborhood,
+      addressAddress: addressAddress,
+      addressNumber: addressNumber,
+      addressComplement: addressComplement,
     );
   }
 
   @action
   void unsetEditUserData() {
-    editUserData = const EditUserParams(
-      id: 0,
+    editUserData = const EditUserBodyParam(
       name: '',
       email: '',
       phone: '',
       birth: '',
       addressId: null,
-      zipCode: '',
-      state: '',
-      city: '',
-      neighborhood: '',
-      address: '',
-      number: null,
-      complement: null,
+      addressZipCode: '',
+      addressState: '',
+      addressCity: '',
+      addressNeighborhood: '',
+      addressAddress: '',
+      addressNumber: null,
+      addressComplement: null,
+    );
+  }
+
+  @action
+  void setEditUserUrlParams({
+    int? userId,
+  }) {
+    editUserUrlParams = editUserUrlParams.copyWith(
+      userId: userId,
     );
   }
 
@@ -115,10 +126,13 @@ abstract class UserControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> edit(bool isSubscription) async {
+  Future<void> edit() async {
     setIsLoadingEdit(true);
 
-    Either<bool> response = await userRepository.edit(params: editUserData);
+    Either<bool> response = await userRepository.editUser(
+      params: editUserData,
+      urlParams: editUserUrlParams,
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -131,7 +145,7 @@ abstract class UserControllerBase with Store, BaseController {
 
       setIsLoadingEdit(false);
 
-      router.push(!isSubscription ? '/' : '/payment-review');
+      router.push('/users');
     }
   }
 
@@ -139,7 +153,7 @@ abstract class UserControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<PaginatedData<UserModel>> response = await userRepository.index();
+    Either<PaginatedData<UserModel>> response = await userRepository.listUsers();
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);

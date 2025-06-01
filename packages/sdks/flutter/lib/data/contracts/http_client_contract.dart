@@ -2,19 +2,35 @@ import 'package:sdk_flutter/core/either/either.dart';
 import 'package:sdk_flutter/core/types/json.dart';
 
 abstract class HttpClientContract {
-  FutureEither<bool> delete({required String url});
+  FutureEither<bool> delete({required String url, Json? urlParams});
 
-  FutureEither<Json> get({required String url, Json? queryParams});
+  FutureEither<T> get<T>({
+    required String url,
+    Json? queryParams,
+    Json? urlParams,
+  });
 
   FutureEither<T> index<T>({
     required String url,
     Json? queryParams,
-    bool isPaginated = false,
+    Json? urlParams,
   });
 
-  FutureEither<bool> patch({required String url, required Json data});
+  FutureEither<bool> patch({
+    required String url,
+    required Json data,
+    Json? urlParams,
+  });
 
-  FutureEither<Json> post({required String url, required dynamic data});
+  FutureEither<Json> post({
+    required String url,
+    required dynamic data,
+    Json? urlParams,
+  });
 
-  FutureEither<bool> put({required String url, required dynamic data});
+  FutureEither<bool> put({
+    required String url,
+    required dynamic data,
+    Json? urlParams,
+  });
 }

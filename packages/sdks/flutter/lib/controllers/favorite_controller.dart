@@ -1,17 +1,13 @@
 import 'package:go_router/go_router.dart';
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/data/repositories/favorites/favorite_repository.dart';
-import 'package:sdk_flutter/domain/models/favorite_model.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'favorite_controller.g.dart';
 
 class FavoriteController = FavoriteControllerBase with _$FavoriteController;
 
 abstract class FavoriteControllerBase with Store, BaseController {
-  final FavoriteRepository favoriteRepository;
+  final FavoritesRepository favoriteRepository;
   final AlertContract alert;
   final GoRouter router;
 
@@ -53,7 +49,7 @@ abstract class FavoriteControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<List<FavoriteModel>> response = await favoriteRepository.index();
+    Either<PaginatedData<FavoriteModel>> response = await favoriteRepository.listFavorites();
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -62,7 +58,8 @@ abstract class FavoriteControllerBase with Store, BaseController {
     }
 
     if (response.isRight) {
-      setFavorites(response.right!);
+      setFavorites(response.right!.data);
+      setLastPage(response.right!.meta.lastPage);
 
       setIsLoadingIndex(false);
     }
@@ -72,8 +69,10 @@ abstract class FavoriteControllerBase with Store, BaseController {
   Future<void> create({required int activityId}) async {
     setIsLoadingCreate(true);
 
-    Either<FavoriteModel> response = await favoriteRepository.add(
-      activityId: activityId,
+    Either<FavoriteModel> response = await favoriteRepository.addFavorite(
+      params: AddFavoriteBodyParam(
+        activityId: activityId.toString(),
+      ),
     );
 
     if (response.isLeft) {
@@ -91,8 +90,10 @@ abstract class FavoriteControllerBase with Store, BaseController {
   Future<void> delete({required int activityId}) async {
     setIsLoadingDelete(true);
 
-    Either<bool> response = await favoriteRepository.delete(
-      activityId: activityId,
+    Either<bool> response = await favoriteRepository.removeFavorite(
+      urlParams: RemoveFavoriteUrlParam(
+        activityId: activityId,
+      ),
     );
 
     if (response.isLeft) {

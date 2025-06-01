@@ -11,11 +11,11 @@ part 'city_controller.g.dart';
 class CityController = CityControllerBase with _$CityController;
 
 abstract class CityControllerBase with Store, BaseController {
-  final CityRepository cityRepository;
+  final CitiesRepository citiesRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  CityControllerBase(this.cityRepository, this.alert, this.router);
+  CityControllerBase(this.citiesRepository, this.alert, this.router);
 
   @observable
   List<CityModel> cities = [];
@@ -37,7 +37,7 @@ abstract class CityControllerBase with Store, BaseController {
   Future<void> index() async {
     setIsLoadingIndex(true);
 
-    Either<List<CityModel>> citiesResponse = await cityRepository.index();
+    Either<List<CityModel>> citiesResponse = await citiesRepository.get();
 
     if (citiesResponse.isLeft) {
       handleApiError(citiesResponse.left!, alert, router);

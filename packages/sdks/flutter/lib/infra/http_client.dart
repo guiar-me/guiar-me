@@ -80,68 +80,114 @@ class HttpClient implements HttpClientContract {
     );
 
   @override
-  FutureEither<bool> delete({required String url}) async {
-    dynamic apiResponse = await _client.delete(url);
+  FutureEither<bool> delete({required String url, Json? urlParams}) async {
+    dynamic apiResponse = await _client.delete(parseUrl(url, urlParams));
 
     return parseResponse<bool>(apiResponse);
   }
 
   @override
-  FutureEither<Json> get({required String url, Json? queryParams}) async {
-    dynamic apiResponse = await _client.get(url, queryParameters: queryParams);
+  FutureEither<T> get<T>({
+    required String url,
+    Json? queryParams,
+    Json? urlParams,
+  }) async {
+    dynamic apiResponse = await _client.get(
+      parseUrl(url, urlParams),
+      queryParameters: queryParams,
+    );
 
-    return parseResponse<Json>(apiResponse);
+    return parseResponse<T>(apiResponse);
   }
 
   @override
   FutureEither<T> index<T>({
     required String url,
     Json? queryParams,
-    bool isPaginated = false,
+    Json? urlParams,
   }) async {
-    dynamic apiResponse = await _client.get(url, queryParameters: queryParams);
+    dynamic apiResponse = await _client.get(
+      parseUrl(url, urlParams),
+      queryParameters: queryParams,
+    );
 
-    return parseResponse<T>(apiResponse, isPaginated: isPaginated);
+    return parseResponse<T>(apiResponse, isIndex: true);
   }
 
   @override
-  FutureEither<bool> patch({required String url, required Json data}) async {
-    dynamic apiResponse = await _client.patch(url, data: data);
+  FutureEither<bool> patch({
+    required String url,
+    required Json data,
+    Json? urlParams,
+  }) async {
+    dynamic apiResponse = await _client.patch(
+      parseUrl(url, urlParams),
+      data: data,
+    );
 
     return parseResponse<bool>(apiResponse);
   }
 
   @override
-  FutureEither<Json> post({required String url, required dynamic data}) async {
-    dynamic apiResponse = await _client.post(url, data: data);
+  FutureEither<Json> post({
+    required String url,
+    required dynamic data,
+    Json? urlParams,
+  }) async {
+    dynamic apiResponse = await _client.post(
+      parseUrl(url, urlParams),
+      data: data,
+    );
 
     return parseResponse<Json>(apiResponse);
   }
 
   @override
-  FutureEither<bool> put({required String url, required dynamic data}) async {
+  FutureEither<bool> put({
+    required String url,
+    required dynamic data,
+    Json? urlParams,
+  }) async {
     if (data is FormData) {
       data.fields.add(const MapEntry('_method', 'PUT'));
 
-      dynamic apiResponse = await _client.post(url, data: data);
+      dynamic apiResponse = await _client.post(
+        parseUrl(url, urlParams),
+        data: data,
+      );
 
       return parseResponse<bool>(apiResponse);
     }
 
-    dynamic apiResponse = await _client.put(url, data: data);
+    dynamic apiResponse = await _client.put(
+      parseUrl(url, urlParams),
+      data: data,
+    );
 
     return parseResponse<bool>(apiResponse);
   }
 
+  String parseUrl(String url, Json? urlParams) {
+    if (urlParams == null) {
+      return url;
+    }
+
+    urlParams.forEach((key, value) {
+      url = url.replaceAll('{$key}', value.toString());
+    });
+
+    return url;
+  }
+
   Either<T> parseResponse<T>(
     Response<dynamic> response, {
-    bool isPaginated = false,
+    bool isIndex = false,
   }) {
     switch (response.statusCode) {
       case 204:
         return Right<T>(true as T);
       case 200:
-        return !isPaginated
+        return !isIndex
             ? Right<T>(response.data as T)
             : Right<T>(PaginatedData.fromMap(response.data) as T);
       case 201:
