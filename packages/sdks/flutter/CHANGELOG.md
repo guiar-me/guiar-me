@@ -1,5 +1,13 @@
 # @guiar-me/sdk-flutter
 
+## 1.2.0
+
+### Minor Changes
+
+- f7616e1: It has been changed so that models and repositories are automatically generated.
+
+  Functions have been renamed to follow the standard in the AP documentation
+
 ## 1.1.6
 
 ### Patch Changes
