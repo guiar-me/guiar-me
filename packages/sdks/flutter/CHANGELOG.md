@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.2.1
+
+### Patch Changes
+
+- 7915c2a: Fix error on AuthController dependencies
+
 ## 1.2.0
 
 ### Minor Changes
