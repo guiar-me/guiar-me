@@ -46,7 +46,7 @@ class SdkFlutterDependencies {
       () => ActivityController(getIt(), getIt(), getIt()),
     );
     getIt.registerLazySingleton<AuthController>(
-      () => AuthController(getIt(), getIt(), getIt()),
+      () => AuthController(getIt(), getIt(), getIt(), getIt()),
     );
     getIt.registerLazySingleton<CategoryController>(
       () => CategoryController(getIt(), getIt(), getIt()),
