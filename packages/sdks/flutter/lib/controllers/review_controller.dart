@@ -1,29 +1,25 @@
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/data/repositories/reviews/review_repository.dart';
-import 'package:sdk_flutter/data/repositories/reviews/add_review_params.dart';
-import 'package:sdk_flutter/domain/models/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'review_controller.g.dart';
 
 class ReviewController = ReviewControllerBase with _$ReviewController;
 
 abstract class ReviewControllerBase with Store, BaseController {
-  final ReviewRepository reviewRepository;
+  final ReviewsRepository reviewsRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  ReviewControllerBase(this.reviewRepository, this.alert, this.router);
+  ReviewControllerBase(this.reviewsRepository, this.alert, this.router);
 
   @observable
-  AddReviewParams addReviewParams = const AddReviewParams(
+  AddReviewBodyParam addReviewBodyParam = const AddReviewBodyParam(
     activityId: 0,
     stars: 0,
     description: '',
+    userId: 0,
   );
 
   @observable
@@ -38,13 +34,15 @@ abstract class ReviewControllerBase with Store, BaseController {
   @action
   void setAddReviewParams({
     int? activityId,
-    double? stars,
+    int? stars,
     String? description,
+    int? userId,
   }) {
-    addReviewParams = addReviewParams.copyWith(
+    addReviewBodyParam = addReviewBodyParam.copyWith(
       activityId: activityId,
       stars: stars,
       description: description,
+      userId: userId,
     );
   }
 
@@ -67,8 +65,8 @@ abstract class ReviewControllerBase with Store, BaseController {
   Future<void> index({required int activityId}) async {
     setIsLoadingIndex(true);
 
-    Either<List<ReviewModel>> response = await reviewRepository.index(
-      activityId: activityId,
+    Either<PaginatedData<ReviewModel>> response = await reviewsRepository.listReviews(
+      queryParams: ListReviewsQueryParam(activityId: activityId),
     );
 
     if (response.isLeft) {
@@ -78,8 +76,8 @@ abstract class ReviewControllerBase with Store, BaseController {
     }
 
     if (response.isRight) {
-      setReviews(response.right!);
-
+      setReviews(response.right!.data);
+      setLastPage(response.right!.meta.lastPage);
       setIsLoadingIndex(false);
     }
   }
@@ -88,8 +86,8 @@ abstract class ReviewControllerBase with Store, BaseController {
   Future<void> add(BuildContext context) async {
     setIsLoadingAdd(true);
 
-    Either<ReviewModel> response = await reviewRepository.add(
-      params: addReviewParams,
+    Either<ReviewModel> response = await reviewsRepository.addReview(
+      params: addReviewBodyParam,
     );
 
     if (response.isLeft) {
@@ -101,7 +99,7 @@ abstract class ReviewControllerBase with Store, BaseController {
     if (response.isRight) {
       setIsLoadingAdd(false);
 
-      router.replace('/details?id=${addReviewParams.activityId}');
+      router.replace('/details?id=${addReviewBodyParam.activityId}');
     }
   }
 }

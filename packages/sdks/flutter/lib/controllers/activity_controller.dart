@@ -1,66 +1,80 @@
 import 'dart:typed_data';
 
-import 'package:sdk_flutter/controllers/base_controller.dart';
-import 'package:sdk_flutter/controllers/contracts/alert.dart';
-import 'package:sdk_flutter/core/either/either.dart';
-import 'package:sdk_flutter/core/types/paginated_data.dart';
-import 'package:sdk_flutter/data/repositories/activities/activity_repository.dart';
-import 'package:sdk_flutter/data/repositories/activities/add_activity_params.dart';
-import 'package:sdk_flutter/data/repositories/activities/edit_activity_params.dart';
-import 'package:sdk_flutter/domain/models/activity_model.dart';
 import 'package:mobx/mobx.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sdk_flutter/sdk_flutter.dart';
 
 part 'activity_controller.g.dart';
 
 class ActivityController = ActivityControllerBase with _$ActivityController;
 
 abstract class ActivityControllerBase with Store, BaseController {
-  final ActivityRepository activityRepository;
+  final ActivitiesRepository activitiesRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  ActivityControllerBase(this.activityRepository, this.alert, this.router);
+  ActivityControllerBase(this.activitiesRepository, this.alert, this.router);
 
   @observable
-  AddActivityParams addActivityData = const AddActivityParams(
+  AddActivityBodyParam addActivityData = const AddActivityBodyParam(
     name: '',
     description: '',
     category: '',
     isVerified: false,
-    state: '',
-    city: '',
-    neighborhood: '',
-    address: '',
-    number: null,
-    complement: null,
-    fileName: null,
-    fileBytes: null,
+    addressState: '',
+    addressCity: '',
+    addressNeighborhood: '',
+    addressAddress: '',
+    addressNumber: null,
+    addressComplement: null,
+    imageName: null,
+    imageBytes: null,
   );
 
   @observable
-  EditActivityParams editActivityData = const EditActivityParams(
-    id: 0,
+  EditActivityBodyParam editActivityData = const EditActivityBodyParam(
     name: '',
     description: '',
     category: '',
     isVerified: false,
     addressId: 0,
-    state: '',
-    city: '',
-    neighborhood: '',
-    address: '',
-    number: null,
-    complement: null,
-    fileName: null,
-    fileBytes: null,
+    addressState: '',
+    addressCity: '',
+    addressNeighborhood: '',
+    addressAddress: '',
+    addressNumber: null,
+    addressComplement: null,
+    imageName: null,
+    imageBytes: null,
   );
 
   @observable
-  String? fileName;
+  EditActivityUrlParam editActivityUrlParams = const EditActivityUrlParam(
+    activityId: 0,
+  );
 
   @observable
-  Uint8List? fileBytes;
+  FindActivityUrlParam findActivityUrlParams = const FindActivityUrlParam(
+    activityId: 0,
+  );
+
+  @observable
+  RemoveActivityUrlParam removeActivityUrlParams = const RemoveActivityUrlParam(
+    activityId: 0,
+  );
+
+  @observable
+  ListActivitiesQueryParam listActivitiesQueryParams = const ListActivitiesQueryParam(
+    page: 1,
+    category: '',
+    city: '',
+  );
+
+  @observable
+  String? imageName;
+
+  @observable
+  Uint8List? imageBytes;
 
   @observable
   List<ActivityModel> activities = [];
@@ -107,30 +121,30 @@ abstract class ActivityControllerBase with Store, BaseController {
       description: description,
       category: category,
       isVerified: isVerified,
-      state: state,
-      city: city,
-      neighborhood: neighborhood,
-      address: address,
-      number: number,
-      complement: complement,
+      addressState: state,
+      addressCity: city,
+      addressNeighborhood: neighborhood,
+      addressAddress: address,
+      addressNumber: number,
+      addressComplement: complement,
     );
   }
 
   @action
   void unsetAddActivityData() {
-    addActivityData = const AddActivityParams(
+    addActivityData = const AddActivityBodyParam(
       name: '',
       description: '',
       category: '',
       isVerified: false,
-      state: '',
-      city: '',
-      neighborhood: '',
-      address: '',
-      number: null,
-      complement: null,
-      fileName: null,
-      fileBytes: null,
+      addressState: '',
+      addressCity: '',
+      addressNeighborhood: '',
+      addressAddress: '',
+      addressNumber: null,
+      addressComplement: null,
+      imageName: null,
+      imageBytes: null,
     );
   }
 
@@ -142,57 +156,119 @@ abstract class ActivityControllerBase with Store, BaseController {
     String? category,
     bool? isVerified,
     int? addressId,
-    String? state,
-    String? city,
-    String? neighborhood,
-    String? address,
-    String? number,
-    String? complement,
+    String? addressState,
+    String? addressCity,
+    String? addressNeighborhood,
+    String? addressAddress,
+    String? addressNumber,
+    String? addressComplement,
   }) {
     editActivityData = editActivityData.copyWith(
-      id: id,
       name: name,
       description: description,
       category: category,
       isVerified: isVerified,
       addressId: addressId,
-      state: state,
-      city: city,
-      neighborhood: neighborhood,
-      address: address,
-      number: number,
-      complement: complement,
+      addressState: addressState,
+      addressCity: addressCity,
+      addressNeighborhood: addressNeighborhood,
+      addressAddress: addressAddress,
+      addressNumber: addressNumber,
+      addressComplement: addressComplement,
     );
   }
 
   @action
   void unsetEditActivityData() {
-    editActivityData = const EditActivityParams(
-      id: 0,
+    editActivityData = const EditActivityBodyParam(
       name: '',
       description: '',
       category: '',
       isVerified: false,
       addressId: 0,
-      state: '',
-      city: '',
-      neighborhood: '',
-      address: '',
-      number: null,
-      complement: null,
-      fileName: null,
-      fileBytes: null,
+      addressState: '',
+      addressCity: '',
+      addressNeighborhood: '',
+      addressAddress: '',
+      addressNumber: null,
+      addressComplement: null,
+      imageName: null,
+      imageBytes: null,
     );
   }
 
   @action
-  void setFileName(String data) {
-    fileName = data;
+  void setEditActivityUrlParams({
+    int? activityId,
+  }) {
+    editActivityUrlParams = editActivityUrlParams.copyWith(activityId: activityId);
   }
 
   @action
-  void setFileBytes(Uint8List data) {
-    fileBytes = data;
+  void unsetEditActivityUrlParams() {
+    editActivityUrlParams = const EditActivityUrlParam(
+      activityId: 0,
+    );
+  }
+
+  @action
+  void setFindActivityUrlParams({
+    int? activityId,
+  }) {
+    findActivityUrlParams = findActivityUrlParams.copyWith(activityId: activityId);
+  }
+
+  @action
+  void unsetFindActivityUrlParams() {
+    findActivityUrlParams = const FindActivityUrlParam(
+      activityId: 0,
+    );
+  }
+
+  @action
+  void setRemoveActivityUrlParams({
+    int? activityId,
+  }) {
+    removeActivityUrlParams = removeActivityUrlParams.copyWith(activityId: activityId);
+  }
+
+  @action
+  void unsetRemoveActivityUrlParams() {
+    removeActivityUrlParams = const RemoveActivityUrlParam(
+      activityId: 0,
+    );
+  }
+
+  @action
+  void setListActivitiesQueryParams({
+    int? page,
+    String? category,
+    String? city,
+  }) {
+    listActivitiesQueryParams = listActivitiesQueryParams.copyWith(
+      page: page,
+      category: category,
+      city: city,
+    );
+  }
+
+  @action
+  void unsetListActivitiesQueryParams() {
+    listActivitiesQueryParams = const ListActivitiesQueryParam(
+      page: 1,
+      category: '',
+      city: '',
+    );
+  }
+
+  @action
+  void setImageName(String data) {
+    imageName = data;
+  }
+
+  @action
+  void setImageBytes(Uint8List data) {
+    imageBytes = data;
   }
 
   @action
@@ -251,8 +327,14 @@ abstract class ActivityControllerBase with Store, BaseController {
   Future<void> index({String? category, String? city}) async {
     setIsLoadingIndex(true);
 
-    Either<PaginatedData<ActivityModel>> response = await activityRepository
-        .index(page: currentPage, category: category, city: city);
+    listActivitiesQueryParams = listActivitiesQueryParams.copyWith(
+      page: currentPage,
+    );
+
+    Either<PaginatedData<ActivityModel>> response = await activitiesRepository
+        .listActivities(
+          queryParams: listActivitiesQueryParams,
+        );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -272,10 +354,10 @@ abstract class ActivityControllerBase with Store, BaseController {
   Future<void> add() async {
     setIsLoadingAdd(true);
 
-    Either<ActivityModel> response = await activityRepository.add(
+    Either<ActivityModel> response = await activitiesRepository.addActivity(
       params: addActivityData.copyWith(
-        fileBytes: fileBytes,
-        fileName: fileName,
+        imageBytes: imageBytes,
+        imageName: imageName,
       ),
     );
 
@@ -298,11 +380,12 @@ abstract class ActivityControllerBase with Store, BaseController {
   Future<void> edit() async {
     setIsLoadingEdit(true);
 
-    Either<bool> response = await activityRepository.edit(
+    Either<bool> response = await activitiesRepository.editActivity(
       params: editActivityData.copyWith(
-        fileBytes: fileBytes,
-        fileName: fileName,
+        imageBytes: imageBytes,
+        imageName: imageName,
       ),
+      urlParams: editActivityUrlParams,
     );
 
     if (response.isLeft) {
@@ -322,10 +405,12 @@ abstract class ActivityControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> get(String id) async {
+  Future<void> get() async {
     setIsLoadingGet(true);
 
-    Either<ActivityModel> response = await activityRepository.get(id: id);
+    Either<ActivityModel> response = await activitiesRepository.findActivity(
+      urlParams: findActivityUrlParams,
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);
@@ -341,10 +426,12 @@ abstract class ActivityControllerBase with Store, BaseController {
   }
 
   @action
-  Future<void> delete(String id) async {
+  Future<void> delete() async {
     setIsLoadingDelete(true);
 
-    Either<bool> response = await activityRepository.delete(id: id);
+    Either<bool> response = await activitiesRepository.removeActivity(
+      urlParams: removeActivityUrlParams,
+    );
 
     if (response.isLeft) {
       handleApiError(response.left!, alert, router);

@@ -2,14 +2,14 @@ import 'package:sdk_flutter/core/either/either.dart';
 import 'package:sdk_flutter/data/contracts/http_client_contract.dart';
 import 'package:sdk_flutter/domain/models/city_model.dart';
 
-class CityRepository {
+class CitiesRepository {
   final HttpClientContract _httpClient;
 
-  CityRepository(this._httpClient);
+  CitiesRepository(this._httpClient);
 
-  FutureEither<List<CityModel>> index() async {
-    Either<List<dynamic>> response = await _httpClient.index<List<dynamic>>(
-      url: 'statics/cities',
+  FutureEither<List<CityModel>> get() async {
+    Either<List<dynamic>> response = await _httpClient.get<List<dynamic>>(
+      url: 'api/statics/cities',
     );
 
     return response.isRight
