@@ -2,7 +2,7 @@ name: sdk_flutter
 description: "Guiar.me - SDK Flutter"
 
 publish_to: 'none'
-version: 1.2.0
+version: 1.2.1
 
 homepage: https://guiar.me
 
