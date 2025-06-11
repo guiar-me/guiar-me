@@ -4,8 +4,8 @@ import 'package:sdk_flutter/sdk_flutter.dart';
 
 class AddressModel extends Equatable {
   final int id;
-  final int? activityId;
-  final int? userId;
+  final int? addressableId;
+  final String? addressableType;
   final String state;
   final String city;
   final String neighborhood;
@@ -19,8 +19,8 @@ class AddressModel extends Equatable {
   @override
   List<Object> get props => <Object>[
     id,
-    activityId ?? 0,
-    userId ?? 0,
+    addressableId ?? 0,
+    addressableType ?? '',
     state,
     city,
     neighborhood,
@@ -34,8 +34,8 @@ class AddressModel extends Equatable {
 
   const AddressModel({
     required this.id,
-    this.activityId,
-    this.userId,
+    this.addressableId,
+    this.addressableType,
     required this.state,
     required this.city,
     required this.neighborhood,
@@ -50,8 +50,8 @@ class AddressModel extends Equatable {
   static AddressModel fromMap(Json data) {
     return AddressModel(
       id: data['id'],
-      activityId: data['activity_id'],
-      userId: data['user_id'],
+      addressableId: data['addressable_id'],
+      addressableType: data['addressable_type'],
       state: data['state'],
       city: data['city'],
       neighborhood: data['neighborhood'],
