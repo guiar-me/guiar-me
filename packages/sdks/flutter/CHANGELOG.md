@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.1
+
+### Patch Changes
+
+- 8a0e648: Add Event management functionality with CRUD operations
+
 ## 1.3.0
 
 ### Minor Changes
