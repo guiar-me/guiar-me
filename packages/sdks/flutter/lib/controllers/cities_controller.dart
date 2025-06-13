@@ -6,16 +6,16 @@ import 'package:sdk_flutter/data/repositories/cities/city_repository.dart';
 import 'package:sdk_flutter/domain/models/city_model.dart';
 import 'package:mobx/mobx.dart';
 
-part 'city_controller.g.dart';
+part 'cities_controller.g.dart';
 
-class CityController = CityControllerBase with _$CityController;
+class CitiesController = CitiesControllerBase with _$CitiesController;
 
-abstract class CityControllerBase with Store, BaseController {
+abstract class CitiesControllerBase with Store, BaseController {
   final CitiesRepository citiesRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  CityControllerBase(this.citiesRepository, this.alert, this.router);
+  CitiesControllerBase(this.citiesRepository, this.alert, this.router);
 
   @observable
   List<CityModel> cities = [];
