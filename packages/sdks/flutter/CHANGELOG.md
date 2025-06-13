@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.2
+
+### Patch Changes
+
+- 8188e3a: Refactor controllers to be auto generated
+
 ## 1.3.1
 
 ### Patch Changes
