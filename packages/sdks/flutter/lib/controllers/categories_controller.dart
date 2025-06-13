@@ -6,16 +6,17 @@ import 'package:sdk_flutter/data/repositories/categories/category_repository.dar
 import 'package:sdk_flutter/domain/models/category_model.dart';
 import 'package:mobx/mobx.dart';
 
-part 'category_controller.g.dart';
+part 'categories_controller.g.dart';
 
-class CategoryController = CategoryControllerBase with _$CategoryController;
+class CategoriesController = CategoriesControllerBase
+    with _$CategoriesController;
 
-abstract class CategoryControllerBase with Store, BaseController {
+abstract class CategoriesControllerBase with Store, BaseController {
   final CategoriesRepository categoriesRepository;
   final AlertContract alert;
   final GoRouter router;
 
-  CategoryControllerBase(this.categoriesRepository, this.alert, this.router);
+  CategoriesControllerBase(this.categoriesRepository, this.alert, this.router);
 
   @observable
   List<CategoryModel> categories = [];

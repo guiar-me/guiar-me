@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'city_controller.dart';
+part of 'cities_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'city_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CityController on CityControllerBase, Store {
+mixin _$CitiesController on CitiesControllerBase, Store {
   late final _$citiesAtom =
-      Atom(name: 'CityControllerBase.cities', context: context);
+      Atom(name: 'CitiesControllerBase.cities', context: context);
 
   @override
   List<CityModel> get cities {
@@ -26,7 +26,7 @@ mixin _$CityController on CityControllerBase, Store {
   }
 
   late final _$isLoadingIndexAtom =
-      Atom(name: 'CityControllerBase.isLoadingIndex', context: context);
+      Atom(name: 'CitiesControllerBase.isLoadingIndex', context: context);
 
   @override
   bool get isLoadingIndex {
@@ -42,35 +42,35 @@ mixin _$CityController on CityControllerBase, Store {
   }
 
   late final _$indexAsyncAction =
-      AsyncAction('CityControllerBase.index', context: context);
+      AsyncAction('CitiesControllerBase.index', context: context);
 
   @override
   Future<void> index() {
     return _$indexAsyncAction.run(() => super.index());
   }
 
-  late final _$CityControllerBaseActionController =
-      ActionController(name: 'CityControllerBase', context: context);
+  late final _$CitiesControllerBaseActionController =
+      ActionController(name: 'CitiesControllerBase', context: context);
 
   @override
   void setCities(List<CityModel> data) {
-    final _$actionInfo = _$CityControllerBaseActionController.startAction(
-        name: 'CityControllerBase.setCities');
+    final _$actionInfo = _$CitiesControllerBaseActionController.startAction(
+        name: 'CitiesControllerBase.setCities');
     try {
       return super.setCities(data);
     } finally {
-      _$CityControllerBaseActionController.endAction(_$actionInfo);
+      _$CitiesControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setIsLoadingIndex(bool loading) {
-    final _$actionInfo = _$CityControllerBaseActionController.startAction(
-        name: 'CityControllerBase.setIsLoadingIndex');
+    final _$actionInfo = _$CitiesControllerBaseActionController.startAction(
+        name: 'CitiesControllerBase.setIsLoadingIndex');
     try {
       return super.setIsLoadingIndex(loading);
     } finally {
-      _$CityControllerBaseActionController.endAction(_$actionInfo);
+      _$CitiesControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

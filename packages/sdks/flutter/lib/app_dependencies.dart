@@ -42,38 +42,38 @@ class SdkFlutterDependencies {
     );
 
     // Controllers
-    getIt.registerLazySingleton<ActivityController>(
-      () => ActivityController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<ActivitiesController>(
+      () => ActivitiesController(getIt(), getIt(), getIt()),
     );
     getIt.registerLazySingleton<AuthController>(
       () => AuthController(getIt(), getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<CategoryController>(
-      () => CategoryController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<CategoriesController>(
+      () => CategoriesController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<CityController>(
-      () => CityController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<CitiesController>(
+      () => CitiesController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<FavoriteController>(
-      () => FavoriteController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<FavoritesController>(
+      () => FavoritesController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<HighlightController>(
-      () => HighlightController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<HighlightsController>(
+      () => HighlightsController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<LegalContentController>(
-      () => LegalContentController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<LegalContentsController>(
+      () => LegalContentsController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<PlanController>(
-      () => PlanController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<PlansController>(
+      () => PlansController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<ReviewController>(
-      () => ReviewController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<ReviewsController>(
+      () => ReviewsController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<SubscriptionController>(
-      () => SubscriptionController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<SubscriptionsController>(
+      () => SubscriptionsController(getIt(), getIt(), getIt()),
     );
-    getIt.registerLazySingleton<UserController>(
-      () => UserController(getIt(), getIt(), getIt()),
+    getIt.registerLazySingleton<UsersController>(
+      () => UsersController(getIt(), getIt(), getIt()),
     );
   }
 }

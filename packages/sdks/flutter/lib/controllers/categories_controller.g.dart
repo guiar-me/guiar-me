@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category_controller.dart';
+part of 'categories_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'category_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CategoryController on CategoryControllerBase, Store {
+mixin _$CategoriesController on CategoriesControllerBase, Store {
   late final _$categoriesAtom =
-      Atom(name: 'CategoryControllerBase.categories', context: context);
+      Atom(name: 'CategoriesControllerBase.categories', context: context);
 
   @override
   List<CategoryModel> get categories {
@@ -26,7 +26,7 @@ mixin _$CategoryController on CategoryControllerBase, Store {
   }
 
   late final _$isLoadingIndexAtom =
-      Atom(name: 'CategoryControllerBase.isLoadingIndex', context: context);
+      Atom(name: 'CategoriesControllerBase.isLoadingIndex', context: context);
 
   @override
   bool get isLoadingIndex {
@@ -42,35 +42,35 @@ mixin _$CategoryController on CategoryControllerBase, Store {
   }
 
   late final _$indexAsyncAction =
-      AsyncAction('CategoryControllerBase.index', context: context);
+      AsyncAction('CategoriesControllerBase.index', context: context);
 
   @override
   Future<void> index() {
     return _$indexAsyncAction.run(() => super.index());
   }
 
-  late final _$CategoryControllerBaseActionController =
-      ActionController(name: 'CategoryControllerBase', context: context);
+  late final _$CategoriesControllerBaseActionController =
+      ActionController(name: 'CategoriesControllerBase', context: context);
 
   @override
   void setCategories(List<CategoryModel> data) {
-    final _$actionInfo = _$CategoryControllerBaseActionController.startAction(
-        name: 'CategoryControllerBase.setCategories');
+    final _$actionInfo = _$CategoriesControllerBaseActionController.startAction(
+        name: 'CategoriesControllerBase.setCategories');
     try {
       return super.setCategories(data);
     } finally {
-      _$CategoryControllerBaseActionController.endAction(_$actionInfo);
+      _$CategoriesControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setIsLoadingIndex(bool loading) {
-    final _$actionInfo = _$CategoryControllerBaseActionController.startAction(
-        name: 'CategoryControllerBase.setIsLoadingIndex');
+    final _$actionInfo = _$CategoriesControllerBaseActionController.startAction(
+        name: 'CategoriesControllerBase.setIsLoadingIndex');
     try {
       return super.setIsLoadingIndex(loading);
     } finally {
-      _$CategoryControllerBaseActionController.endAction(_$actionInfo);
+      _$CategoriesControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
