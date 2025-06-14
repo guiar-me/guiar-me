@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.4
+
+### Patch Changes
+
+- 0619c96: Add boolean return in controller functions
+
 ## 1.3.3
 
 ### Patch Changes
