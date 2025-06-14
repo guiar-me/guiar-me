@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.3
+
+### Patch Changes
+
+- c298956: Fix type error on EditLegalContentUrlParam
+
 ## 1.3.2
 
 ### Patch Changes
