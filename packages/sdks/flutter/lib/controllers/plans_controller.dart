@@ -122,7 +122,7 @@ abstract class PlansControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> findPlan() async {
+  Future<void> findPlan() async {
     setIsLoadingFindPlan(true);
   
     Either<PlanModel> response = await plansRepository.findPlan(
@@ -133,23 +133,17 @@ abstract class PlansControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindPlan(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setPlan(response.right!);
   
       setIsLoadingFindPlan(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listPlans() async {
+  Future<void> listPlans() async {
     setIsLoadingListPlans(true);
   
     Either<PaginatedData<PlanModel>> response = await plansRepository.listPlans();
@@ -158,8 +152,6 @@ abstract class PlansControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListPlans(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -167,15 +159,11 @@ abstract class PlansControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListPlans(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addPlan() async {
+  Future<void> addPlan() async {
     setIsLoadingAddPlan(true);
   
     Either<PlanModel> response = await plansRepository.addPlan(
@@ -186,23 +174,17 @@ abstract class PlansControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddPlan(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setPlan(response.right!);
   
       setIsLoadingAddPlan(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editPlan() async {
+  Future<void> editPlan() async {
     setIsLoadingEditPlan(true);
   
     Either<bool> response = await plansRepository.editPlan(
@@ -214,18 +196,12 @@ abstract class PlansControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditPlan(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditPlan(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

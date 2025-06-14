@@ -163,7 +163,7 @@ abstract class ActivitiesControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeActivity() async {
+  Future<void> removeActivity() async {
     setIsLoadingRemoveActivity(true);
   
     Either<bool> response = await activitiesRepository.removeActivity(
@@ -174,22 +174,16 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveActivity(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveActivity(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> findActivity() async {
+  Future<void> findActivity() async {
     setIsLoadingFindActivity(true);
   
     Either<ActivityModel> response = await activitiesRepository.findActivity(
@@ -200,23 +194,17 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindActivity(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setActivity(response.right!);
   
       setIsLoadingFindActivity(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listActivities() async {
+  Future<void> listActivities() async {
     setIsLoadingListActivities(true);
   
     Either<PaginatedData<ActivityModel>> response = await activitiesRepository.listActivities(
@@ -227,8 +215,6 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListActivities(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -236,15 +222,11 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListActivities(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addActivity() async {
+  Future<void> addActivity() async {
     setIsLoadingAddActivity(true);
   
     Either<ActivityModel> response = await activitiesRepository.addActivity(
@@ -258,23 +240,17 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddActivity(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setActivity(response.right!);
   
       setIsLoadingAddActivity(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editActivity() async {
+  Future<void> editActivity() async {
     setIsLoadingEditActivity(true);
   
     Either<bool> response = await activitiesRepository.editActivity(
@@ -289,18 +265,12 @@ abstract class ActivitiesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditActivity(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditActivity(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

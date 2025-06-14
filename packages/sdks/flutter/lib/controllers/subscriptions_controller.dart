@@ -114,7 +114,7 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeSubscription() async {
+  Future<void> removeSubscription() async {
     setIsLoadingRemoveSubscription(true);
   
     Either<bool> response = await subscriptionsRepository.removeSubscription(
@@ -125,22 +125,16 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveSubscription(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveSubscription(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> findSubscription() async {
+  Future<void> findSubscription() async {
     setIsLoadingFindSubscription(true);
   
     Either<SubscriptionModel> response = await subscriptionsRepository.findSubscription(
@@ -151,23 +145,17 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindSubscription(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setSubscription(response.right!);
   
       setIsLoadingFindSubscription(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listSubscriptions() async {
+  Future<void> listSubscriptions() async {
     setIsLoadingListSubscriptions(true);
   
     Either<PaginatedData<SubscriptionModel>> response = await subscriptionsRepository.listSubscriptions();
@@ -176,8 +164,6 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListSubscriptions(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -185,15 +171,11 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListSubscriptions(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addSubscription() async {
+  Future<void> addSubscription() async {
     setIsLoadingAddSubscription(true);
   
     Either<SubscriptionModel> response = await subscriptionsRepository.addSubscription(
@@ -204,19 +186,13 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddSubscription(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setSubscription(response.right!);
   
       setIsLoadingAddSubscription(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }
