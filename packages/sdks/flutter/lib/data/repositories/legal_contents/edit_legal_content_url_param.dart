@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:sdk_flutter/sdk_flutter.dart';
 
 class EditLegalContentUrlParam extends Equatable {
-  final int type;
+  final String type;
 
   @override
   List<Object> get props => <Object>[
@@ -21,7 +21,7 @@ class EditLegalContentUrlParam extends Equatable {
   }
 
   EditLegalContentUrlParam copyWith({
-    int? type,
+    String? type,
   }) {
     return EditLegalContentUrlParam(
       type: type ?? this.type,
