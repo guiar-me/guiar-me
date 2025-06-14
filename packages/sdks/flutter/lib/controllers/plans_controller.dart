@@ -73,7 +73,9 @@ abstract class PlansControllerBase with Store, BaseController {
   
   @action
   void setListPlan(List<PlanModel> data) {
-    listPlan = data;
+    currentPage == 1
+      ? listPlan = data
+      : listPlan = [...listPlan, ...data];
   }
   
   @action
@@ -108,7 +110,9 @@ abstract class PlansControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListPlans(bool isLoading) {
-    isLoadingListPlans = isLoading;
+    currentPage == 1
+      ? isLoadingListPlans = isLoading
+      : setIsLoadingNextPage(isLoading);
   }
   
   @action

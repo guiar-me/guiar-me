@@ -59,7 +59,9 @@ abstract class FavoritesControllerBase with Store, BaseController {
   
   @action
   void setListFavorite(List<FavoriteModel> data) {
-    listFavorite = data;
+    currentPage == 1
+      ? listFavorite = data
+      : listFavorite = [...listFavorite, ...data];
   }
   
   @action
@@ -89,7 +91,9 @@ abstract class FavoritesControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListFavorites(bool isLoading) {
-    isLoadingListFavorites = isLoading;
+    currentPage == 1
+      ? isLoadingListFavorites = isLoading
+      : setIsLoadingNextPage(isLoading);
   }
   
   @action
