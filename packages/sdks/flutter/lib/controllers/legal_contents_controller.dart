@@ -66,7 +66,7 @@ abstract class LegalContentsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> findLegalContent() async {
+  Future<void> findLegalContent() async {
     setIsLoadingFindLegalContent(true);
   
     Either<LegalContentModel> response = await legalContentsRepository.findLegalContent(
@@ -77,23 +77,17 @@ abstract class LegalContentsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindLegalContent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setLegalContent(response.right!);
   
       setIsLoadingFindLegalContent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editLegalContent() async {
+  Future<void> editLegalContent() async {
     setIsLoadingEditLegalContent(true);
   
     Either<bool> response = await legalContentsRepository.editLegalContent(
@@ -105,18 +99,12 @@ abstract class LegalContentsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditLegalContent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditLegalContent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

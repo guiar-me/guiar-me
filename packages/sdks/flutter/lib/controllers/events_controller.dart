@@ -146,7 +146,7 @@ abstract class EventsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeEvent() async {
+  Future<void> removeEvent() async {
     setIsLoadingRemoveEvent(true);
   
     Either<bool> response = await eventsRepository.removeEvent(
@@ -157,22 +157,16 @@ abstract class EventsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveEvent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveEvent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> findEvent() async {
+  Future<void> findEvent() async {
     setIsLoadingFindEvent(true);
   
     Either<EventModel> response = await eventsRepository.findEvent(
@@ -183,23 +177,17 @@ abstract class EventsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindEvent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setEvent(response.right!);
   
       setIsLoadingFindEvent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listEvents() async {
+  Future<void> listEvents() async {
     setIsLoadingListEvents(true);
   
     Either<PaginatedData<EventModel>> response = await eventsRepository.listEvents(
@@ -210,8 +198,6 @@ abstract class EventsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListEvents(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -219,15 +205,11 @@ abstract class EventsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListEvents(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addEvent() async {
+  Future<void> addEvent() async {
     setIsLoadingAddEvent(true);
   
     Either<EventModel> response = await eventsRepository.addEvent(
@@ -238,23 +220,17 @@ abstract class EventsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddEvent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setEvent(response.right!);
   
       setIsLoadingAddEvent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editEvent() async {
+  Future<void> editEvent() async {
     setIsLoadingEditEvent(true);
   
     Either<bool> response = await eventsRepository.editEvent(
@@ -266,18 +242,12 @@ abstract class EventsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditEvent(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditEvent(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

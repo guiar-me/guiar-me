@@ -170,7 +170,7 @@ abstract class ReviewsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeReview() async {
+  Future<void> removeReview() async {
     setIsLoadingRemoveReview(true);
   
     Either<bool> response = await reviewsRepository.removeReview(
@@ -181,22 +181,16 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveReview(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveReview(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> findReview() async {
+  Future<void> findReview() async {
     setIsLoadingFindReview(true);
   
     Either<ReviewModel> response = await reviewsRepository.findReview(
@@ -207,23 +201,17 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindReview(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setReview(response.right!);
   
       setIsLoadingFindReview(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listReviews() async {
+  Future<void> listReviews() async {
     setIsLoadingListReviews(true);
   
     Either<PaginatedData<ReviewModel>> response = await reviewsRepository.listReviews(
@@ -234,8 +222,6 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListReviews(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -243,15 +229,11 @@ abstract class ReviewsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListReviews(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> updateReview() async {
+  Future<void> updateReview() async {
     setIsLoadingUpdateReview(true);
   
     Either<bool> response = await reviewsRepository.updateReview(
@@ -263,22 +245,16 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingUpdateReview(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingUpdateReview(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addReview() async {
+  Future<void> addReview() async {
     setIsLoadingAddReview(true);
   
     Either<ReviewModel> response = await reviewsRepository.addReview(
@@ -289,23 +265,17 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddReview(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setReview(response.right!);
   
       setIsLoadingAddReview(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editReview() async {
+  Future<void> editReview() async {
     setIsLoadingEditReview(true);
   
     Either<bool> response = await reviewsRepository.editReview(
@@ -317,18 +287,12 @@ abstract class ReviewsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditReview(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditReview(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

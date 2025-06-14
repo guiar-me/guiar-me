@@ -146,7 +146,7 @@ abstract class CouponsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeCoupon() async {
+  Future<void> removeCoupon() async {
     setIsLoadingRemoveCoupon(true);
   
     Either<bool> response = await couponsRepository.removeCoupon(
@@ -157,22 +157,16 @@ abstract class CouponsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveCoupon(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveCoupon(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> findCoupon() async {
+  Future<void> findCoupon() async {
     setIsLoadingFindCoupon(true);
   
     Either<CouponModel> response = await couponsRepository.findCoupon(
@@ -183,23 +177,17 @@ abstract class CouponsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindCoupon(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setCoupon(response.right!);
   
       setIsLoadingFindCoupon(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listCoupons() async {
+  Future<void> listCoupons() async {
     setIsLoadingListCoupons(true);
   
     Either<PaginatedData<CouponModel>> response = await couponsRepository.listCoupons(
@@ -210,8 +198,6 @@ abstract class CouponsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListCoupons(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -219,15 +205,11 @@ abstract class CouponsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListCoupons(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addCoupon() async {
+  Future<void> addCoupon() async {
     setIsLoadingAddCoupon(true);
   
     Either<CouponModel> response = await couponsRepository.addCoupon(
@@ -238,23 +220,17 @@ abstract class CouponsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddCoupon(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setCoupon(response.right!);
   
       setIsLoadingAddCoupon(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> editCoupon() async {
+  Future<void> editCoupon() async {
     setIsLoadingEditCoupon(true);
   
     Either<bool> response = await couponsRepository.editCoupon(
@@ -266,18 +242,12 @@ abstract class CouponsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditCoupon(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditCoupon(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }

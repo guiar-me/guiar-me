@@ -98,7 +98,7 @@ abstract class FavoritesControllerBase with Store, BaseController {
   }
   
   @action
-  Future<bool> removeFavorite() async {
+  Future<void> removeFavorite() async {
     setIsLoadingRemoveFavorite(true);
   
     Either<bool> response = await favoritesRepository.removeFavorite(
@@ -109,22 +109,16 @@ abstract class FavoritesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveFavorite(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveFavorite(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> listFavorites() async {
+  Future<void> listFavorites() async {
     setIsLoadingListFavorites(true);
   
     Either<PaginatedData<FavoriteModel>> response = await favoritesRepository.listFavorites();
@@ -133,8 +127,6 @@ abstract class FavoritesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListFavorites(false);
-  
-      return false;
     }
   
     if (response.isRight) {
@@ -142,15 +134,11 @@ abstract class FavoritesControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListFavorites(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
   @action
-  Future<bool> addFavorite() async {
+  Future<void> addFavorite() async {
     setIsLoadingAddFavorite(true);
   
     Either<FavoriteModel> response = await favoritesRepository.addFavorite(
@@ -161,19 +149,13 @@ abstract class FavoritesControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddFavorite(false);
-  
-      return false;
     }
   
     if (response.isRight) {
       setFavorite(response.right!);
   
       setIsLoadingAddFavorite(false);
-  
-      return true;
     }
-  
-    return false;
   }
   
 }
