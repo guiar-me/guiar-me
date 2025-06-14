@@ -138,7 +138,7 @@ abstract class HighlightsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<void> removeHighlight() async {
+  Future<bool> removeHighlight() async {
     setIsLoadingRemoveHighlight(true);
   
     Either<bool> response = await highlightsRepository.removeHighlight(
@@ -149,16 +149,22 @@ abstract class HighlightsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveHighlight(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveHighlight(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> findHighlight() async {
+  Future<bool> findHighlight() async {
     setIsLoadingFindHighlight(true);
   
     Either<HighlightModel> response = await highlightsRepository.findHighlight(
@@ -169,17 +175,23 @@ abstract class HighlightsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindHighlight(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setHighlight(response.right!);
   
       setIsLoadingFindHighlight(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> listHighlights() async {
+  Future<bool> listHighlights() async {
     setIsLoadingListHighlights(true);
   
     Either<PaginatedData<HighlightModel>> response = await highlightsRepository.listHighlights();
@@ -188,6 +200,8 @@ abstract class HighlightsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListHighlights(false);
+  
+      return false;
     }
   
     if (response.isRight) {
@@ -195,11 +209,15 @@ abstract class HighlightsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListHighlights(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> addHighlight() async {
+  Future<bool> addHighlight() async {
     setIsLoadingAddHighlight(true);
   
     Either<HighlightModel> response = await highlightsRepository.addHighlight(
@@ -210,17 +228,23 @@ abstract class HighlightsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddHighlight(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setHighlight(response.right!);
   
       setIsLoadingAddHighlight(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> editHighlight() async {
+  Future<bool> editHighlight() async {
     setIsLoadingEditHighlight(true);
   
     Either<bool> response = await highlightsRepository.editHighlight(
@@ -232,12 +256,18 @@ abstract class HighlightsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditHighlight(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditHighlight(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
 }

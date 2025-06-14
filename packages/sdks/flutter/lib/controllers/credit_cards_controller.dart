@@ -114,7 +114,7 @@ abstract class CreditCardsControllerBase with Store, BaseController {
   }
   
   @action
-  Future<void> removeCreditCard() async {
+  Future<bool> removeCreditCard() async {
     setIsLoadingRemoveCreditCard(true);
   
     Either<bool> response = await creditCardsRepository.removeCreditCard(
@@ -125,16 +125,22 @@ abstract class CreditCardsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingRemoveCreditCard(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingRemoveCreditCard(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> findCreditCard() async {
+  Future<bool> findCreditCard() async {
     setIsLoadingFindCreditCard(true);
   
     Either<CreditCardModel> response = await creditCardsRepository.findCreditCard(
@@ -145,17 +151,23 @@ abstract class CreditCardsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingFindCreditCard(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setCreditCard(response.right!);
   
       setIsLoadingFindCreditCard(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> listCreditCards() async {
+  Future<bool> listCreditCards() async {
     setIsLoadingListCreditCards(true);
   
     Either<PaginatedData<CreditCardModel>> response = await creditCardsRepository.listCreditCards();
@@ -164,6 +176,8 @@ abstract class CreditCardsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListCreditCards(false);
+  
+      return false;
     }
   
     if (response.isRight) {
@@ -171,11 +185,15 @@ abstract class CreditCardsControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListCreditCards(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> addCreditCard() async {
+  Future<bool> addCreditCard() async {
     setIsLoadingAddCreditCard(true);
   
     Either<CreditCardModel> response = await creditCardsRepository.addCreditCard(
@@ -186,13 +204,19 @@ abstract class CreditCardsControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddCreditCard(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setCreditCard(response.right!);
   
       setIsLoadingAddCreditCard(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
 }
