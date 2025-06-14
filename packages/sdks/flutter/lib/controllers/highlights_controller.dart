@@ -79,7 +79,9 @@ abstract class HighlightsControllerBase with Store, BaseController {
   
   @action
   void setListHighlight(List<HighlightModel> data) {
-    listHighlight = data;
+    currentPage == 1
+      ? listHighlight = data
+      : listHighlight = [...listHighlight, ...data];
   }
   
   @action
@@ -124,7 +126,9 @@ abstract class HighlightsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListHighlights(bool isLoading) {
-    isLoadingListHighlights = isLoading;
+    currentPage == 1
+      ? isLoadingListHighlights = isLoading
+      : setIsLoadingNextPage(isLoading);
   }
   
   @action

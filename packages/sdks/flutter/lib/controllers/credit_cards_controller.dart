@@ -70,7 +70,9 @@ abstract class CreditCardsControllerBase with Store, BaseController {
   
   @action
   void setListCreditCard(List<CreditCardModel> data) {
-    listCreditCard = data;
+    currentPage == 1
+      ? listCreditCard = data
+      : listCreditCard = [...listCreditCard, ...data];
   }
   
   @action
@@ -105,7 +107,9 @@ abstract class CreditCardsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListCreditCards(bool isLoading) {
-    isLoadingListCreditCards = isLoading;
+    currentPage == 1
+      ? isLoadingListCreditCards = isLoading
+      : setIsLoadingNextPage(isLoading);
   }
   
   @action
