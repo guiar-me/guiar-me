@@ -154,7 +154,7 @@ abstract class UsersControllerBase with Store, BaseController {
   }
   
   @action
-  Future<void> listUsers() async {
+  Future<bool> listUsers() async {
     setIsLoadingListUsers(true);
   
     Either<PaginatedData<UserModel>> response = await usersRepository.listUsers();
@@ -163,6 +163,8 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingListUsers(false);
+  
+      return false;
     }
   
     if (response.isRight) {
@@ -170,11 +172,15 @@ abstract class UsersControllerBase with Store, BaseController {
       setLastPage(response.right!.meta.lastPage);
   
       setIsLoadingListUsers(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> meUser() async {
+  Future<bool> meUser() async {
     setIsLoadingMeUser(true);
   
     Either<UserModel> response = await usersRepository.meUser();
@@ -183,17 +189,23 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingMeUser(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setUser(response.right!);
   
       setIsLoadingMeUser(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> addFcmToken() async {
+  Future<bool> addFcmToken() async {
     setIsLoadingAddFcmToken(true);
   
     Either<FcmTokenModel> response = await usersRepository.addFcmToken(
@@ -204,17 +216,23 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingAddFcmToken(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setFcmToken(response.right!);
   
       setIsLoadingAddFcmToken(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> editUser() async {
+  Future<bool> editUser() async {
     setIsLoadingEditUser(true);
   
     Either<bool> response = await usersRepository.editUser(
@@ -226,16 +244,22 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingEditUser(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       // TODO: refresh state or navigate to another page
       setIsLoadingEditUser(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> signInUser() async {
+  Future<bool> signInUser() async {
     setIsLoadingSignInUser(true);
   
     Either<UserModel> response = await usersRepository.signInUser(
@@ -246,17 +270,23 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingSignInUser(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setUser(response.right!);
   
       setIsLoadingSignInUser(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
   @action
-  Future<void> signUpUser() async {
+  Future<bool> signUpUser() async {
     setIsLoadingSignUpUser(true);
   
     Either<UserModel> response = await usersRepository.signUpUser(
@@ -267,13 +297,19 @@ abstract class UsersControllerBase with Store, BaseController {
       handleApiError(response.left!, alert, router);
   
       setIsLoadingSignUpUser(false);
+  
+      return false;
     }
   
     if (response.isRight) {
       setUser(response.right!);
   
       setIsLoadingSignUpUser(false);
+  
+      return true;
     }
+  
+    return false;
   }
   
 }
