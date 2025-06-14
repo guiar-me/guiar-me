@@ -142,7 +142,7 @@ mixin _$LegalContentsController on LegalContentsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> findLegalContent() {
+  Future<bool> findLegalContent() {
     return _$findLegalContentAsyncAction.run(() => super.findLegalContent());
   }
 
@@ -151,7 +151,7 @@ mixin _$LegalContentsController on LegalContentsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> editLegalContent() {
+  Future<bool> editLegalContent() {
     return _$editLegalContentAsyncAction.run(() => super.editLegalContent());
   }
 

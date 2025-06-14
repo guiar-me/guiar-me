@@ -350,7 +350,7 @@ mixin _$ActivitiesController on ActivitiesControllerBase, Store {
       AsyncAction('ActivitiesControllerBase.removeActivity', context: context);
 
   @override
-  Future<void> removeActivity() {
+  Future<bool> removeActivity() {
     return _$removeActivityAsyncAction.run(() => super.removeActivity());
   }
 
@@ -358,7 +358,7 @@ mixin _$ActivitiesController on ActivitiesControllerBase, Store {
       AsyncAction('ActivitiesControllerBase.findActivity', context: context);
 
   @override
-  Future<void> findActivity() {
+  Future<bool> findActivity() {
     return _$findActivityAsyncAction.run(() => super.findActivity());
   }
 
@@ -366,7 +366,7 @@ mixin _$ActivitiesController on ActivitiesControllerBase, Store {
       AsyncAction('ActivitiesControllerBase.listActivities', context: context);
 
   @override
-  Future<void> listActivities() {
+  Future<bool> listActivities() {
     return _$listActivitiesAsyncAction.run(() => super.listActivities());
   }
 
@@ -374,7 +374,7 @@ mixin _$ActivitiesController on ActivitiesControllerBase, Store {
       AsyncAction('ActivitiesControllerBase.addActivity', context: context);
 
   @override
-  Future<void> addActivity() {
+  Future<bool> addActivity() {
     return _$addActivityAsyncAction.run(() => super.addActivity());
   }
 
@@ -382,7 +382,7 @@ mixin _$ActivitiesController on ActivitiesControllerBase, Store {
       AsyncAction('ActivitiesControllerBase.editActivity', context: context);
 
   @override
-  Future<void> editActivity() {
+  Future<bool> editActivity() {
     return _$editActivityAsyncAction.run(() => super.editActivity());
   }
 

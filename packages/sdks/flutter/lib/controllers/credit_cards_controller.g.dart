@@ -242,7 +242,7 @@ mixin _$CreditCardsController on CreditCardsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> removeCreditCard() {
+  Future<bool> removeCreditCard() {
     return _$removeCreditCardAsyncAction.run(() => super.removeCreditCard());
   }
 
@@ -250,7 +250,7 @@ mixin _$CreditCardsController on CreditCardsControllerBase, Store {
       AsyncAction('CreditCardsControllerBase.findCreditCard', context: context);
 
   @override
-  Future<void> findCreditCard() {
+  Future<bool> findCreditCard() {
     return _$findCreditCardAsyncAction.run(() => super.findCreditCard());
   }
 
@@ -259,7 +259,7 @@ mixin _$CreditCardsController on CreditCardsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> listCreditCards() {
+  Future<bool> listCreditCards() {
     return _$listCreditCardsAsyncAction.run(() => super.listCreditCards());
   }
 
@@ -267,7 +267,7 @@ mixin _$CreditCardsController on CreditCardsControllerBase, Store {
       AsyncAction('CreditCardsControllerBase.addCreditCard', context: context);
 
   @override
-  Future<void> addCreditCard() {
+  Future<bool> addCreditCard() {
     return _$addCreditCardAsyncAction.run(() => super.addCreditCard());
   }
 

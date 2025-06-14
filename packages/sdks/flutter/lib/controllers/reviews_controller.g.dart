@@ -365,7 +365,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.removeReview', context: context);
 
   @override
-  Future<void> removeReview() {
+  Future<bool> removeReview() {
     return _$removeReviewAsyncAction.run(() => super.removeReview());
   }
 
@@ -373,7 +373,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.findReview', context: context);
 
   @override
-  Future<void> findReview() {
+  Future<bool> findReview() {
     return _$findReviewAsyncAction.run(() => super.findReview());
   }
 
@@ -381,7 +381,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.listReviews', context: context);
 
   @override
-  Future<void> listReviews() {
+  Future<bool> listReviews() {
     return _$listReviewsAsyncAction.run(() => super.listReviews());
   }
 
@@ -389,7 +389,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.updateReview', context: context);
 
   @override
-  Future<void> updateReview() {
+  Future<bool> updateReview() {
     return _$updateReviewAsyncAction.run(() => super.updateReview());
   }
 
@@ -397,7 +397,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.addReview', context: context);
 
   @override
-  Future<void> addReview() {
+  Future<bool> addReview() {
     return _$addReviewAsyncAction.run(() => super.addReview());
   }
 
@@ -405,7 +405,7 @@ mixin _$ReviewsController on ReviewsControllerBase, Store {
       AsyncAction('ReviewsControllerBase.editReview', context: context);
 
   @override
-  Future<void> editReview() {
+  Future<bool> editReview() {
     return _$editReviewAsyncAction.run(() => super.editReview());
   }
 

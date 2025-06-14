@@ -242,7 +242,7 @@ mixin _$SubscriptionsController on SubscriptionsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> removeSubscription() {
+  Future<bool> removeSubscription() {
     return _$removeSubscriptionAsyncAction
         .run(() => super.removeSubscription());
   }
@@ -252,7 +252,7 @@ mixin _$SubscriptionsController on SubscriptionsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> findSubscription() {
+  Future<bool> findSubscription() {
     return _$findSubscriptionAsyncAction.run(() => super.findSubscription());
   }
 
@@ -261,7 +261,7 @@ mixin _$SubscriptionsController on SubscriptionsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> listSubscriptions() {
+  Future<bool> listSubscriptions() {
     return _$listSubscriptionsAsyncAction.run(() => super.listSubscriptions());
   }
 
@@ -270,7 +270,7 @@ mixin _$SubscriptionsController on SubscriptionsControllerBase, Store {
       context: context);
 
   @override
-  Future<void> addSubscription() {
+  Future<bool> addSubscription() {
     return _$addSubscriptionAsyncAction.run(() => super.addSubscription());
   }
 

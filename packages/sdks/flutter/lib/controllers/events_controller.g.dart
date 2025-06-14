@@ -303,7 +303,7 @@ mixin _$EventsController on EventsControllerBase, Store {
       AsyncAction('EventsControllerBase.removeEvent', context: context);
 
   @override
-  Future<void> removeEvent() {
+  Future<bool> removeEvent() {
     return _$removeEventAsyncAction.run(() => super.removeEvent());
   }
 
@@ -311,7 +311,7 @@ mixin _$EventsController on EventsControllerBase, Store {
       AsyncAction('EventsControllerBase.findEvent', context: context);
 
   @override
-  Future<void> findEvent() {
+  Future<bool> findEvent() {
     return _$findEventAsyncAction.run(() => super.findEvent());
   }
 
@@ -319,7 +319,7 @@ mixin _$EventsController on EventsControllerBase, Store {
       AsyncAction('EventsControllerBase.listEvents', context: context);
 
   @override
-  Future<void> listEvents() {
+  Future<bool> listEvents() {
     return _$listEventsAsyncAction.run(() => super.listEvents());
   }
 
@@ -327,7 +327,7 @@ mixin _$EventsController on EventsControllerBase, Store {
       AsyncAction('EventsControllerBase.addEvent', context: context);
 
   @override
-  Future<void> addEvent() {
+  Future<bool> addEvent() {
     return _$addEventAsyncAction.run(() => super.addEvent());
   }
 
@@ -335,7 +335,7 @@ mixin _$EventsController on EventsControllerBase, Store {
       AsyncAction('EventsControllerBase.editEvent', context: context);
 
   @override
-  Future<void> editEvent() {
+  Future<bool> editEvent() {
     return _$editEventAsyncAction.run(() => super.editEvent());
   }
 

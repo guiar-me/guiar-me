@@ -304,7 +304,7 @@ mixin _$CouponsController on CouponsControllerBase, Store {
       AsyncAction('CouponsControllerBase.removeCoupon', context: context);
 
   @override
-  Future<void> removeCoupon() {
+  Future<bool> removeCoupon() {
     return _$removeCouponAsyncAction.run(() => super.removeCoupon());
   }
 
@@ -312,7 +312,7 @@ mixin _$CouponsController on CouponsControllerBase, Store {
       AsyncAction('CouponsControllerBase.findCoupon', context: context);
 
   @override
-  Future<void> findCoupon() {
+  Future<bool> findCoupon() {
     return _$findCouponAsyncAction.run(() => super.findCoupon());
   }
 
@@ -320,7 +320,7 @@ mixin _$CouponsController on CouponsControllerBase, Store {
       AsyncAction('CouponsControllerBase.listCoupons', context: context);
 
   @override
-  Future<void> listCoupons() {
+  Future<bool> listCoupons() {
     return _$listCouponsAsyncAction.run(() => super.listCoupons());
   }
 
@@ -328,7 +328,7 @@ mixin _$CouponsController on CouponsControllerBase, Store {
       AsyncAction('CouponsControllerBase.addCoupon', context: context);
 
   @override
-  Future<void> addCoupon() {
+  Future<bool> addCoupon() {
     return _$addCouponAsyncAction.run(() => super.addCoupon());
   }
 
@@ -336,7 +336,7 @@ mixin _$CouponsController on CouponsControllerBase, Store {
       AsyncAction('CouponsControllerBase.editCoupon', context: context);
 
   @override
-  Future<void> editCoupon() {
+  Future<bool> editCoupon() {
     return _$editCouponAsyncAction.run(() => super.editCoupon());
   }
 

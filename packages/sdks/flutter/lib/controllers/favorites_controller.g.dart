@@ -193,7 +193,7 @@ mixin _$FavoritesController on FavoritesControllerBase, Store {
       AsyncAction('FavoritesControllerBase.removeFavorite', context: context);
 
   @override
-  Future<void> removeFavorite() {
+  Future<bool> removeFavorite() {
     return _$removeFavoriteAsyncAction.run(() => super.removeFavorite());
   }
 
@@ -201,7 +201,7 @@ mixin _$FavoritesController on FavoritesControllerBase, Store {
       AsyncAction('FavoritesControllerBase.listFavorites', context: context);
 
   @override
-  Future<void> listFavorites() {
+  Future<bool> listFavorites() {
     return _$listFavoritesAsyncAction.run(() => super.listFavorites());
   }
 
@@ -209,7 +209,7 @@ mixin _$FavoritesController on FavoritesControllerBase, Store {
       AsyncAction('FavoritesControllerBase.addFavorite', context: context);
 
   @override
-  Future<void> addFavorite() {
+  Future<bool> addFavorite() {
     return _$addFavoriteAsyncAction.run(() => super.addFavorite());
   }
 

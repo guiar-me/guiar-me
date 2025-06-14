@@ -318,7 +318,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.listUsers', context: context);
 
   @override
-  Future<void> listUsers() {
+  Future<bool> listUsers() {
     return _$listUsersAsyncAction.run(() => super.listUsers());
   }
 
@@ -326,7 +326,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.meUser', context: context);
 
   @override
-  Future<void> meUser() {
+  Future<bool> meUser() {
     return _$meUserAsyncAction.run(() => super.meUser());
   }
 
@@ -334,7 +334,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.addFcmToken', context: context);
 
   @override
-  Future<void> addFcmToken() {
+  Future<bool> addFcmToken() {
     return _$addFcmTokenAsyncAction.run(() => super.addFcmToken());
   }
 
@@ -342,7 +342,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.editUser', context: context);
 
   @override
-  Future<void> editUser() {
+  Future<bool> editUser() {
     return _$editUserAsyncAction.run(() => super.editUser());
   }
 
@@ -350,7 +350,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.signInUser', context: context);
 
   @override
-  Future<void> signInUser() {
+  Future<bool> signInUser() {
     return _$signInUserAsyncAction.run(() => super.signInUser());
   }
 
@@ -358,7 +358,7 @@ mixin _$UsersController on UsersControllerBase, Store {
       AsyncAction('UsersControllerBase.signUpUser', context: context);
 
   @override
-  Future<void> signUpUser() {
+  Future<bool> signUpUser() {
     return _$signUpUserAsyncAction.run(() => super.signUpUser());
   }
 

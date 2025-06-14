@@ -303,7 +303,7 @@ mixin _$HighlightsController on HighlightsControllerBase, Store {
       AsyncAction('HighlightsControllerBase.removeHighlight', context: context);
 
   @override
-  Future<void> removeHighlight() {
+  Future<bool> removeHighlight() {
     return _$removeHighlightAsyncAction.run(() => super.removeHighlight());
   }
 
@@ -311,7 +311,7 @@ mixin _$HighlightsController on HighlightsControllerBase, Store {
       AsyncAction('HighlightsControllerBase.findHighlight', context: context);
 
   @override
-  Future<void> findHighlight() {
+  Future<bool> findHighlight() {
     return _$findHighlightAsyncAction.run(() => super.findHighlight());
   }
 
@@ -319,7 +319,7 @@ mixin _$HighlightsController on HighlightsControllerBase, Store {
       AsyncAction('HighlightsControllerBase.listHighlights', context: context);
 
   @override
-  Future<void> listHighlights() {
+  Future<bool> listHighlights() {
     return _$listHighlightsAsyncAction.run(() => super.listHighlights());
   }
 
@@ -327,7 +327,7 @@ mixin _$HighlightsController on HighlightsControllerBase, Store {
       AsyncAction('HighlightsControllerBase.addHighlight', context: context);
 
   @override
-  Future<void> addHighlight() {
+  Future<bool> addHighlight() {
     return _$addHighlightAsyncAction.run(() => super.addHighlight());
   }
 
@@ -335,7 +335,7 @@ mixin _$HighlightsController on HighlightsControllerBase, Store {
       AsyncAction('HighlightsControllerBase.editHighlight', context: context);
 
   @override
-  Future<void> editHighlight() {
+  Future<bool> editHighlight() {
     return _$editHighlightAsyncAction.run(() => super.editHighlight());
   }
 

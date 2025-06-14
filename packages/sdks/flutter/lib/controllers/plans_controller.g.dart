@@ -244,7 +244,7 @@ mixin _$PlansController on PlansControllerBase, Store {
       AsyncAction('PlansControllerBase.findPlan', context: context);
 
   @override
-  Future<void> findPlan() {
+  Future<bool> findPlan() {
     return _$findPlanAsyncAction.run(() => super.findPlan());
   }
 
@@ -252,7 +252,7 @@ mixin _$PlansController on PlansControllerBase, Store {
       AsyncAction('PlansControllerBase.listPlans', context: context);
 
   @override
-  Future<void> listPlans() {
+  Future<bool> listPlans() {
     return _$listPlansAsyncAction.run(() => super.listPlans());
   }
 
@@ -260,7 +260,7 @@ mixin _$PlansController on PlansControllerBase, Store {
       AsyncAction('PlansControllerBase.addPlan', context: context);
 
   @override
-  Future<void> addPlan() {
+  Future<bool> addPlan() {
     return _$addPlanAsyncAction.run(() => super.addPlan());
   }
 
@@ -268,7 +268,7 @@ mixin _$PlansController on PlansControllerBase, Store {
       AsyncAction('PlansControllerBase.editPlan', context: context);
 
   @override
-  Future<void> editPlan() {
+  Future<bool> editPlan() {
     return _$editPlanAsyncAction.run(() => super.editPlan());
   }
 
