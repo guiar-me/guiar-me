@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.6
+
+### Patch Changes
+
+- 4434c94: Improvement in paginate
+
 ## 1.3.5
 
 ### Patch Changes
