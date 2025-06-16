@@ -82,9 +82,7 @@ abstract class CouponsControllerBase with Store, BaseController {
   
   @action
   void setListCoupon(List<CouponModel> data) {
-    currentPage == 1
-      ? listCoupon = data
-      : listCoupon = [...listCoupon, ...data];
+    listCoupon = data;
   }
   
   @action
@@ -134,9 +132,7 @@ abstract class CouponsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListCoupons(bool isLoading) {
-    currentPage == 1
-      ? isLoadingListCoupons = isLoading
-      : setIsLoadingNextPage(isLoading);
+    isLoadingListCoupons = isLoading;
   }
   
   @action

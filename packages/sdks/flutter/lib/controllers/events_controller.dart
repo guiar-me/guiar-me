@@ -82,9 +82,7 @@ abstract class EventsControllerBase with Store, BaseController {
   
   @action
   void setListEvent(List<EventModel> data) {
-    currentPage == 1
-      ? listEvent = data
-      : listEvent = [...listEvent, ...data];
+    listEvent = data;
   }
   
   @action
@@ -134,9 +132,7 @@ abstract class EventsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListEvents(bool isLoading) {
-    currentPage == 1
-      ? isLoadingListEvents = isLoading
-      : setIsLoadingNextPage(isLoading);
+    isLoadingListEvents = isLoading;
   }
   
   @action
