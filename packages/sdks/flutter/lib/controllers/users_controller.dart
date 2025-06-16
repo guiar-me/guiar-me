@@ -80,7 +80,9 @@ abstract class UsersControllerBase with Store, BaseController {
   
   @action
   void setListUser(List<UserModel> data) {
-    listUser = data;
+    currentPage == 1
+      ? listUser = data
+      : listUser = [...listUser, ...data];
   }
   
   @action
@@ -125,7 +127,9 @@ abstract class UsersControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListUsers(bool isLoading) {
-    isLoadingListUsers = isLoading;
+    currentPage == 1
+      ? isLoadingListUsers = isLoading
+      : setIsLoadingNextPage(isLoading);
   }
   
   @action
