@@ -89,9 +89,7 @@ abstract class ActivitiesControllerBase with Store, BaseController {
   
   @action
   void setListActivity(List<ActivityModel> data) {
-    currentPage == 1
-      ? listActivity = data
-      : listActivity = [...listActivity, ...data];
+    listActivity = data;
   }
   
   @action
@@ -151,9 +149,7 @@ abstract class ActivitiesControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListActivities(bool isLoading) {
-    currentPage == 1
-      ? isLoadingListActivities = isLoading
-      : setIsLoadingNextPage(isLoading);
+    isLoadingListActivities = isLoading;
   }
   
   @action

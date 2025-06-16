@@ -91,9 +91,7 @@ abstract class ReviewsControllerBase with Store, BaseController {
   
   @action
   void setListReview(List<ReviewModel> data) {
-    currentPage == 1
-      ? listReview = data
-      : listReview = [...listReview, ...data];
+    listReview = data;
   }
   
   @action
@@ -153,9 +151,7 @@ abstract class ReviewsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListReviews(bool isLoading) {
-    currentPage == 1
-      ? isLoadingListReviews = isLoading
-      : setIsLoadingNextPage(isLoading);
+    isLoadingListReviews = isLoading;
   }
   
   @action

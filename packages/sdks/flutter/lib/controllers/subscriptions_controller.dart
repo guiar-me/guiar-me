@@ -70,9 +70,7 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
   
   @action
   void setListSubscription(List<SubscriptionModel> data) {
-    currentPage == 1
-      ? listSubscription = data
-      : listSubscription = [...listSubscription, ...data];
+    listSubscription = data;
   }
   
   @action
@@ -107,9 +105,7 @@ abstract class SubscriptionsControllerBase with Store, BaseController {
   
   @action
   void setIsLoadingListSubscriptions(bool isLoading) {
-    currentPage == 1
-      ? isLoadingListSubscriptions = isLoading
-      : setIsLoadingNextPage(isLoading);
+    isLoadingListSubscriptions = isLoading;
   }
   
   @action
