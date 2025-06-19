@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.7
+
+### Patch Changes
+
+- 7498087: Upgrade flutter
+
 ## 1.3.6
 
 ### Patch Changes
