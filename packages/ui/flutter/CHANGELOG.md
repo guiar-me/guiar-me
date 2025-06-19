@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.6
+
+### Patch Changes
+
+- 7498087: Upgrade flutter
+
 ## 1.0.5
 
 ### Patch Changes
