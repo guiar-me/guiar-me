@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.8
+
+### Patch Changes
+
+- c5f95d1: Update intl package version from 0.19.0 to 0.20.2
+
 ## 1.3.7
 
 ### Patch Changes
