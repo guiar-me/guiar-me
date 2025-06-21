@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.9
+
+### Patch Changes
+
+- 429c0e7: Add EventsRepository and EventsController to dependency injection
+
 ## 1.3.8
 
 ### Patch Changes
