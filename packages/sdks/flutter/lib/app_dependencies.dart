@@ -19,6 +19,9 @@ class SdkFlutterDependencies {
     getIt.registerLazySingleton<CitiesRepository>(
       () => CitiesRepository(getIt()),
     );
+    getIt.registerLazySingleton<EventsRepository>(
+      () => EventsRepository(getIt()),
+    );
     getIt.registerLazySingleton<FavoritesRepository>(
       () => FavoritesRepository(getIt()),
     );
@@ -53,6 +56,9 @@ class SdkFlutterDependencies {
     );
     getIt.registerLazySingleton<CitiesController>(
       () => CitiesController(getIt(), getIt(), getIt()),
+    );
+    getIt.registerLazySingleton<EventsController>(
+      () => EventsController(getIt(), getIt(), getIt()),
     );
     getIt.registerLazySingleton<FavoritesController>(
       () => FavoritesController(getIt(), getIt(), getIt()),
