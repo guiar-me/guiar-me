@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.10
+
+### Patch Changes
+
+- 0b80c63: Fix type in activity id field to add favorite
+
 ## 1.3.9
 
 ### Patch Changes
