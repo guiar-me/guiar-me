@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:sdk_flutter/sdk_flutter.dart';
 
 class AddFavoriteBodyParam extends Equatable {
-  final String activityId;
+  final int activityId;
 
   @override
   List<Object> get props => <Object>[
@@ -21,7 +21,7 @@ class AddFavoriteBodyParam extends Equatable {
   }
 
   AddFavoriteBodyParam copyWith({
-    String? activityId,
+    int? activityId,
   }) {
     return AddFavoriteBodyParam(
       activityId: activityId ?? this.activityId,
