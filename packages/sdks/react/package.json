@@ -4,7 +4,7 @@
   "private": false,
   "type": "module",
   "devDependencies": {
-    "@changesets/cli": "^2.29.4",
+    "@changesets/cli": "^2.29.5",
     "@faker-js/faker": "^9.8.0",
     "@types/node": "^24.0.3",
     "typescript": "^5.8.3",
