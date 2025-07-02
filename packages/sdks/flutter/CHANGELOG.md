@@ -1,5 +1,11 @@
 # @guiar-me/sdk-flutter
 
+## 1.3.11
+
+### Patch Changes
+
+- eb59421: Update go router version
+
 ## 1.3.10
 
 ### Patch Changes
