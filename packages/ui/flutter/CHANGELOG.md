@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.7
+
+### Patch Changes
+
+- 05ece6c: Update go_router version
+
 ## 1.0.6
 
 ### Patch Changes
