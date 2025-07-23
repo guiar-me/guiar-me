@@ -17,6 +17,7 @@ class TextAreaFieldWidget extends StatefulWidget {
   final String? hintText;
   final String? defaultValue;
   final double? height;
+  final bool isSimple;
 
   const TextAreaFieldWidget({
     this.onChanged,
@@ -24,6 +25,7 @@ class TextAreaFieldWidget extends StatefulWidget {
     this.hintText,
     this.defaultValue,
     this.height,
+    this.isSimple = false,
     super.key,
   });
 
@@ -89,13 +91,41 @@ class _TextAreaFieldWidgetState extends State<TextAreaFieldWidget> {
             children: [
               QuillSimpleToolbar(
                 controller: _controller,
-                config: const QuillSimpleToolbarConfig(
-                  showFontFamily: false,
-                  showInlineCode: false,
-                  showSubscript: false,
-                  showSuperscript: false,
-                  showCodeBlock: false,
-                ),
+                config: !widget.isSimple
+                    ? const QuillSimpleToolbarConfig(
+                        showCodeBlock: false,
+                        showFontFamily: false,
+                        showInlineCode: false,
+                        showSubscript: false,
+                        showSuperscript: false,
+                      )
+                    : QuillSimpleToolbarConfig(
+                        showAlignmentButtons: false,
+                        showBackgroundColorButton: false,
+                        showBoldButton: false,
+                        showCenterAlignment: false,
+                        showClearFormat: false,
+                        showCodeBlock: false,
+                        showColorButton: false,
+                        showFontFamily: false,
+                        showFontSize: false,
+                        showHeaderStyle: false,
+                        showIndent: false,
+                        showInlineCode: false,
+                        showItalicButton: false,
+                        showLink: false,
+                        showListBullets: false,
+                        showListCheck: false,
+                        showListNumbers: false,
+                        showQuote: false,
+                        showRedo: false,
+                        showSearchButton: false,
+                        showStrikeThrough: false,
+                        showSubscript: false,
+                        showSuperscript: false,
+                        showUnderLineButton: false,
+                        showUndo: false,
+                      ),
               ),
               Container(
                 height: widget.height ?? 150,
@@ -107,14 +137,20 @@ class _TextAreaFieldWidgetState extends State<TextAreaFieldWidget> {
                   config: QuillEditorConfig(
                     customStyles: DefaultStyles(
                       paragraph: DefaultTextBlockStyle(
-                        GoogleFonts.poppins(),
+                        GoogleFonts.poppins().copyWith(
+                          fontSize: AppFontSizes.md.value,
+                          color: AppColors.primaryText.value,
+                        ),
                         const HorizontalSpacing(0, 0),
                         const VerticalSpacing(0, 0),
                         const VerticalSpacing(0, 0),
                         null,
                       ),
                       lists: DefaultListBlockStyle(
-                        GoogleFonts.poppins(),
+                        GoogleFonts.poppins().copyWith(
+                          fontSize: AppFontSizes.md.value,
+                          color: AppColors.primaryText.value,
+                        ),
                         const HorizontalSpacing(0, 0),
                         const VerticalSpacing(6, 0),
                         const VerticalSpacing(0, 6),
