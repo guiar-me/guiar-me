@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.9
+
+### Patch Changes
+
+- 6e9e44e: Add new extension to format date for timeline format
+
 ## 1.0.8
 
 ### Patch Changes
