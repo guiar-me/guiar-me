@@ -2,4 +2,4 @@
 "@guiar-me/ui-flutter": patch
 ---
 
-Add isSimple in TextAreaFieldWidget
+Add new extension to format date for timeline format

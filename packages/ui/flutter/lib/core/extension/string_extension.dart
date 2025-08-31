@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
 extension StringExtension on String {
   // TODO: Use format based on the locale
@@ -22,6 +23,16 @@ extension StringExtension on String {
       ).format(DateFormat('yyyy-MM-dd').parse(this));
 
       return date;
+    } catch (e) {
+      return this;
+    }
+  }
+
+  String toDisplayInTimelineFormat() {
+    String languageCode = ui.PlatformDispatcher.instance.locale.languageCode;
+
+    try {
+      return DateFormat.yMMMMEEEEd(languageCode).format(DateTime.parse(this));
     } catch (e) {
       return this;
     }
