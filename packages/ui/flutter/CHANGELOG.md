@@ -1,5 +1,11 @@
 # @guiar-me/ui-flutter
 
+## 1.0.8
+
+### Patch Changes
+
+- 73d4207: Add isSimple in TextAreaFieldWidget
+
 ## 1.0.7
 
 ### Patch Changes
